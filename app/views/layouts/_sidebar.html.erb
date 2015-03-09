@@ -1,0 +1,45 @@
+<div class="ui vertical fluid small menu sidebar-menu">
+    <div class="header item">
+	   <div class="">
+	       Signed in as
+		   <% if logged_in? %>  
+		       <%= @current_user ? 
+		  	   "#{@current_user.lastname}, #{@current_user.firstname}" :
+		  	   "Guest" 
+			   %>
+		   <% end %>
+	   </div>
+    </div>
+  <%= link_to "Dashboard", 
+     dashboard_path, 
+     :class => params[:controller] == 'dashboard' ? 'active teal item' : 'item'
+   %>
+  <%= link_to "Tickets", 
+     tickets_path, 
+     :class => params[:controller] == 'tickets' ? 'active teal item' : 'item'
+   %>
+  <%= link_to "Ticket Categories", 
+     ticket_categories_path, 
+     :class => params[:controller] == 'ticket_categories' ? 'active teal item' : 'item'
+   %>
+  <%= link_to "Assets", 
+     assets_path, 
+     :class => params[:controller] == 'assets' ? 'active teal item' : 'item'
+  %>
+  <%= link_to "Asset Locations", 
+     asset_locations_path, 
+     :class => params[:controller] == 'asset_locations' ? 'active teal item' : 'item'
+  %>
+  <%= link_to "Users", 
+     users_path, 
+     :class => params[:controller] == 'users' ? 'active teal item' : 'item'
+   %>
+  <%= link_to "Groups", 
+     groups_path, 
+     :class => params[:controller] == 'groups' ? 'active teal item' : 'item'
+   %>
+  <%= link_to "Businesses", 
+     businesses_path, 
+     :class => params[:controller] == 'businesses' ? 'active teal item' : 'item'
+   %>
+</div>

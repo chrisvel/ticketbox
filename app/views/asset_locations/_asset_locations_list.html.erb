@@ -1,0 +1,39 @@
+<table class="ui compact small padded table pure segment sortable">
+  <thead>
+    <tr>
+      <th class="text-center">Location</th>
+      <th class="text-center">Assets</th>
+      <th class="text-center">Owner</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @asset_locations_all.each do |asset_location| %>
+      <tr>
+        <td><%= link_to asset_location.name, asset_location, { :class => 'table_link'} %></td>
+        <td class="text-center"><%= asset_location.assets.count %></td>
+        <td class="text-center"><%= asset_location.owner.lastname + ', ' + asset_location.owner.firstname if asset_location.owner %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="6">
+        <div class="row">  
+          <div class="ui two column grid">
+            <div class="column">
+              <div class="info-pagination">
+                <%= page_entries_info @asset_locations_all %>
+              </div>
+              <%= will_paginate @asset_locations_all %>
+            </div>
+            <div class="column right aligned">
+              <%= link_to '<i class="plus icon"></i> New Asset Location'.html_safe(), 
+                new_asset_location_path, { :class => "ui small teal icon labeled button"} %>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>

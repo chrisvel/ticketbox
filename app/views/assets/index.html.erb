@@ -1,0 +1,23 @@
+<% provide(:title, 'Assets') %>
+
+<div class="row">
+  <div class="four wide column">
+    <%= render 'layouts/sidebar' %>
+  </div>
+  <div class="twelve wide column">
+    <% if logged_in? %>
+      <%= form_tag assets_path, :method => 'get', :class => "ui small form",
+         :id => "asset_search" do %>
+        <div class="ui icon input">
+          <%= text_field_tag :search, params[:search],
+          :placeholder => "Search asset by serial number or by user's Last name" 
+          %>
+          <i class="search icon"></i>
+        </div>
+      <% end %>
+    <% end %>
+    <div id="assets" class="segment-dist">
+      <%= render 'assets_list' %>
+    </div>
+  </div>
+</div>

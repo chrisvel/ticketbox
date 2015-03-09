@@ -1,0 +1,13 @@
+// Place all the styles related to the tickets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#ticket-quick-data{
+  margin-top: 10px;
+  border: 0 none !important;
+  .ui.segment{
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+}

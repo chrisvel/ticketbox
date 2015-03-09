@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Memberships</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Typeof</th>
+      <th>User</th>
+      <th>Group</th>
+      <th>Owner</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @memberships.each do |membership| %>
+      <tr>
+        <td><%= membership.name %></td>
+        <td><%= membership.typeof %></td>
+        <td><%= membership.user_id %></td>
+        <td><%= membership.group_id %></td>
+        <td><%= membership.owner_id %></td>
+        <td><%= link_to 'Show', membership %></td>
+        <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
+        <td><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Membership', new_membership_path %>

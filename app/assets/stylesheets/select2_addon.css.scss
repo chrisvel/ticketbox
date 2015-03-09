@@ -1,0 +1,31 @@
+.select2-container .select2-choice{
+    padding: 1px 0 0px 8px !important;
+    font-size: 0.8rem;
+    background: #fff;
+    background-image: none !important;
+    
+    .select2-arrow b{
+        background: url("/assets/select2.png") no-repeat scroll 0 4px rgba(0, 0, 0, 0);
+    }
+    
+    .select2-result-label{
+        font-size: 0.7em;
+    }
+    
+    .select2-choice{
+        padding: 2px 0 2px 8px;
+    }
+    
+    .ui table .select2-choice{
+        
+    }
+    
+    span.select2-chosen{
+        font-size: 0.76rem;
+    }
+    
+}
+
+.select2-results{
+    font-size: 0.8em !important;
+}

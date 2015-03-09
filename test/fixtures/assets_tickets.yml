@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_id: 1
+  issue: MyString
+  user_id: 1
+  date_opened: 2014-10-10 07:52:18
+  date_closed: 2014-10-10 07:52:18
+  explanation: MyString
+  status: MyString
+  severity: MyString
+  remedy: MyString
+  owner_id: 1
+
+two:
+  category_id: 1
+  issue: MyString
+  user_id: 1
+  date_opened: 2014-10-10 07:52:18
+  date_closed: 2014-10-10 07:52:18
+  explanation: MyString
+  status: MyString
+  severity: MyString
+  remedy: MyString
+  owner_id: 1

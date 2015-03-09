@@ -1,0 +1,50 @@
+<div class="ui grid">
+  <div class="four wide column ">
+    <div class="ui segment">
+      <div class="ui small horizontal statistic ">
+        <div class="value">
+          <%= current_user.tickets.all_unsolved.count %>
+        </div>
+        <div class="label">
+          unsolved tickets
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="four wide column ">
+    <div class="ui segment">
+      <div class="ui small horizontal statistic">
+        <div class="value">
+          <%= current_user.assets.count %>
+        </div>
+        <div class="label">
+          assets
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="four wide column ">
+    <div class="ui segment">
+      <div class="ui small horizontal statistic">
+        <div class="value">
+          <%= current_user.users.count %>
+        </div>
+        <div class="label">
+          users
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="four wide column ">
+    <div class="ui segment">
+      <div class="ui small horizontal statistic">
+        <div class="value">
+          <%= current_user.businesses.count %>
+        </div>
+        <div class="label">
+          Businesses
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

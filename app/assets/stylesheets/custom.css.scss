@@ -1,0 +1,354 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic);
+ 
+/* General stuff */
+
+.text-center{
+  text-align: center !important;
+}
+
+.text-left{
+  text-align: left !important;
+}
+
+.text-right{
+  text-align: right !important;
+}
+
+
+/* semantic overrides */
+
+body{
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: "Ubuntu",​Helvetica,​Arial,​sans-serif !important;
+    height: 100%;
+    width: 100%;
+}
+
+input{
+    font-family: "Ubuntu",Helvetica,Arial,sans-serif !important;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "Ubuntu", Helvetica, Arial, sans-serif!important;
+    font-weight: 400 !important;
+}
+
+.ui.list .item > .content{
+    line-height: 1.4rem;
+}
+
+.ui.list .header{
+    font-size: 0.85rem;
+    
+}
+
+.ui.segment{    
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.ui.form {
+  input.basic-input{
+    border: 0 none !important;
+    border-radius: 0  !important;
+  }
+}
+
+.ui.icon.input > .icon{
+  border-radius: 0 !important;
+}
+
+.table-header{
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ui.sortable.table thead th{
+  border-left: 0 none !important;
+}
+
+.ui.table{
+  margin-top: 0 !important; 
+  
+  &.pure{
+    padding: 1.2rem !important;
+    border: 0 none !important;
+    border-radius: 0 !important;
+    thead{
+      th{ 
+        background: #fff !important;
+        text-transform: uppercase !important;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+    }
+    td{
+      padding: 0.6rem 0.5rem !important;
+      font-size: 0.80rem !important;
+    }
+  }
+  
+  small{
+    color: #aaa;
+    font-size: 0.78rem !important;
+  }
+  
+  a.table_link{
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    font-size: 1rem !important;
+  
+    &:hover, &:focus, &:visited{
+      color: #555;
+    }
+  }
+  
+}
+
+.ui.segment.table-list-header{
+    padding: 0.25rem;
+    .column{
+        margin: 0 !important;
+        
+    }
+    .right.aligned{
+        padding-right: 0;
+    }
+}
+
+.ui.message {
+    &.alert-msg{
+    font-size: 1rem;
+    margin: 0rem;
+    border-bottom: 1px solid #ddd;
+    box-shadow: none !important;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    border-radius: 0 !important;
+    }
+    .header{
+        font-size: 1.1rem;
+    }
+}
+
+.ui.top.left.attached.label{
+  border-radius: 0em 0em 0.2857rem 0em !important;
+}
+
+/* layout */
+
+#logo{
+  font-weight: bold;
+  color: #fff;
+  font-size: 19px;
+  text-decoration: none;
+}
+
+.main {
+  padding-top: 20px;
+  background: #eee;
+}
+
+/* field_with_errors */
+
+
+/* main */
+
+
+/* user_info */
+
+.user_info_name{
+  font-weight: bold;
+  font-size: 26px;
+  padding: 0px 0 0 0px;
+  margin-left: -20px;
+}
+
+.user_info_profile{
+  margin-left: -17px;
+  margin-top: -5px;
+}
+
+/* user_index*/
+
+.user_index_name{
+  font-weight: bold;
+  font-size: 18px;
+  padding: 3px 0 0 0px;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+/* header-menu */
+
+.header-menu, .header-sub-menu{
+  border-radius: 0 !important;
+}
+
+.header-menu{
+  font-size: 13px !important;
+  margin-bottom: 0 !important;
+}
+
+a.item.top-menu-item{
+  padding: 1.25rem 2rem !important;
+  font-size: 14px !important;
+}
+
+/* list views */
+
+span.status {
+  display: inline-block;
+  height: 11px;
+  width: 11px;
+  border-radius: 10px;
+}
+
+span.status.true{
+  background: #5cb85c;
+  color: #5cb85c;
+}
+
+span.status.false{
+  background: #d9534f;
+  color: #d9534f;
+}
+
+.segment-dist{
+  margin-top: 10px;
+}
+
+/* pagination */
+
+.pagination{
+    font-size: 0.8rem;
+    display: inline-block;
+    padding: 0.41rem 0 0 0;
+    text-transform: capitalize;
+    
+    a{
+      color: #444;
+      border: 0 none;
+      text-decoration: none;
+      background: #eee;
+      padding: 0.2rem 0.4rem;
+      
+      &:hover{
+        color: #eee;
+        background: #777;
+      }
+      
+    }    
+    .current{
+      color: #eee;
+      background: #777;
+      padding: 0.2rem 0.4rem;
+    }
+    
+}
+
+.info-pagination{
+    font-size: 0.8rem;
+    text-transform: capitalize;
+    margin-bottom: 0.4rem;
+}
+
+/* sidebar menu */
+
+.ui.vertical.menu.sidebar-menu{
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  .item:first-child{
+    border-radius: 0 !important;
+  }
+}
+
+/* header menu */
+
+.header-menu{
+    .add-new {
+		margin-left: 20px;
+		
+
+		
+  		span{
+  			font-size: 0.8rem;
+  		}
+		
+  		a{
+          color: #222 !important;
+  		}
+    }
+}
+
+/* footer */
+
+footer{
+    
+    div {
+        text-align: right !important;
+        padding: 10px;
+        span {
+            display: block;
+            font-size: 0.6rem;
+            color: #555;
+        }
+    }
+}
+
+/* login */
+
+.login-page-background{
+  width: 100% !important;
+  height: 100%;
+  padding: 4rem 0 5rem !important;
+  top: 0 ;
+  left: 0;
+  right: 0;
+  margin: 0 0 0 0 !important;
+  background: #000 url("login-background-2.png") no-repeat center center fixed;
+  background-size: cover; 
+  position: relative;
+  z-index: 0;
+  
+}
+
+.ui.celled.grid{
+  box-shadow: none !important;
+}
+
+#login-page{
+
+  a{
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 700;
+  }
+  
+  a:hover{
+    text-decoration: none;
+    color: #444;
+    font-weight: 800;
+  }
+}
+
+

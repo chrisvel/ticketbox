@@ -1,0 +1,81 @@
+<div class="ui grid">
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+      <tbody>
+        <tr>
+          <td class="three wide column">Category</td>
+          <td class="eleven wide column"><%= @ticket.ticket_category.name if @ticket.ticket_category %></td>
+        </tr>
+        <tr>
+          <td>Priority</td>
+          <td><%= check_ticket_priority_label(@ticket.severity) %></td>
+        </tr>
+        <tr>
+          <td>Status</td>
+          <td><%= check_ticket_status(@ticket.status) %></td>
+        </tr>
+        <tr>
+          <td>Issue</td>
+          <td><%= @ticket.issue %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+    <tbody>
+      <tr>
+        <td>Requested by</td>
+        <td>
+          <%= link_to @ticket.user, { :class => 'table_link'} do %>
+          <%= @ticket.user.avatar.blank? ? 
+            image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+            image_tag(@ticket.user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            %>
+          <%= @user_fullname %>
+          <% end %>
+      </tr>
+      <tr>
+        <td>Assigned by</td>
+        <td>
+          <%= link_to @ticket.owner, { :class => 'table_link'} do %>
+          <%= @ticket.owner.avatar.blank? ? 
+            image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+            image_tag(@ticket.owner.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            %>
+          <%= @owner_fullname %>
+          <% end %>
+      </tr>
+      <tr>
+        <td class="four wide column">Date opened</td>
+        <td class="ten wide column"><%= time_ago_in_words(@ticket.date_opened) %> ago.</td>
+      </tr>
+      <tr>
+        <td>Date closed</td>
+        <td><%= @ticket.date_closed.blank? ? " - " : time_ago_in_words(@ticket.date_closed)+" ago."  %></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="sixteen wide column">
+    <table class="ui small definition blue table">
+    <tbody>
+      <tr>
+        <td class="two wide column">Description</td>
+        <td class="twelve wide column">
+          <%= @ticket.explanation.blank? ? "No comment" : @ticket.explanation %>
+        </td>
+      </tr>
+      <tr>
+        <td>Remedy</td>
+        <td>
+          <%= @ticket.remedy.blank? ? "No remedy given" : @ticket.remedy  %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

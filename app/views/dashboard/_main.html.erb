@@ -1,0 +1,33 @@
+<%= render partial: "small_boxes" %>
+
+<div class="ui segment">
+  <%= render partial: "activity" %>
+</div>
+
+<div class="ui grid">
+  <div class="twelve wide column ">
+    <div class="ui segment">
+      <%= render partial: "hot_tickets" %>
+    </div>
+  </div>
+  <div class="four wide column ">
+    <div class="ui segment">
+      <%= render partial: "ticket_stats" %>
+    </div>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="eight wide column ">
+    <div class="ui segment">
+      <div class="ui top left attached teal label">Tickets per day of week</div>
+      <canvas id="tickets_dayofweek"></canvas>
+    </div>
+  </div>
+  <div class="eight wide column ">
+    <div class="ui segment">
+      <div class="ui top left attached teal label">Tickets per month</div>
+      <canvas id="tickets_permonth"></canvas>
+    </div>
+  </div>
+</div>

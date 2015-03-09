@@ -1,0 +1,11 @@
+<% provide(:title, 'Businesses') %>
+<% if logged_in? %>
+  <div class="row">
+    <div class="four wide column">
+      <%= render 'layouts/sidebar' %>
+    </div>
+    <div class="twelve wide column ticket-show">
+      <%= render 'businesses_list' %>
+    </div>
+  </div>
+<% end %>

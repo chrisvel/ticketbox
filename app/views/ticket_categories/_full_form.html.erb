@@ -1,0 +1,62 @@
+<div class="ui top left attached teal label">
+	<% if @ticket_category.id %>
+	  Edit ticket category #<%= @ticket_category.id %>
+  <% else %>
+	  New ticket category
+  <% end %>
+</div>
+
+<%= form_for(@ticket_category, :html => {:class => "ui small form"}) do |f| %>
+  <div class="ui items">
+    <div class="item">
+      <div class="ui tiny image">
+        <%= @ticket_category.owner.blank? ? 
+              image_tag("no-image.png", alt: "noimage") :
+                @ticket_category.owner.avatar.blank? ? 
+                image_tag("no-image.png", alt: "noimage") :
+                image_tag(@ticket_category.owner.avatar.url(:medium))
+                %>
+      </div>
+      <div class="middle aligned content">
+        <div class="header">
+          <%= @ticket_category.name.nil? ? "" : "#{@ticket_category.name} " %>
+        </div>
+        <div class="meta">
+          <span class="cinema">
+
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <%= render 'shared/error_messages', :target => @ticket_category %>
+  <div class="asset-data">
+    <div class="field ui input fluid">
+      <%= f.label :name %>
+      <%= f.text_field :name, 
+        :class => "", 
+        :placeholder => "Enter ticket category name.." %>
+    </div>
+    <div class="field">
+      <%= f.label :owner_id %>
+      <input placeholder="<%= @ticket_category.nil? ? 
+      @ticket_category.owner.lastname+", "+@ticket_category.owner.firstname : 
+      current_user.lastname+", "+current_user.firstname %>"
+        readonly="readonly" type="text" >
+    </div>
+    <div class="ui divider"></div>
+    <div class="field">
+      <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
+       @ticket_category, :class => "ui small labeled icon button", id: "btn-ticket-close" %>
+      <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
+          <i class="save icon"></i> Save changes
+      <% end %>
+      <%= link_to '<i class="delete icon"></i> Delete ticket category'.html_safe(), 
+        @ticket_category, 
+        method: :delete, 
+        data: { confirm: 'Are you sure?' }, 
+        :class =>"ui red small icon labeled button" if @ticket_category.id %>
+    </div>
+  </div>
+<% end %>

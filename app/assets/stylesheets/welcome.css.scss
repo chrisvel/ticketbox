@@ -1,0 +1,41 @@
+.intro-page-background{
+  width: 100% !important;
+  height: 100%;
+  padding: 4rem auto 5rem !important;
+  top: 0 ;
+  left: 0;
+  right: 0;
+  margin: 0 0 0 0 !important;
+  background: #000 url("login-background-2.png") no-repeat center center fixed;
+  background-size: cover; 
+  position: relative;
+  z-index: 0;
+}
+
+#intro-info{
+  min-height: 440px;
+  background: #eee;
+  margin: 0 !important;
+  padding: 40px 0px;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+
+#intro-features{
+  min-height: 740px;
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 40px 0px;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+
+#intro-header{
+  font-size: 3.1rem;
+  font-weight: 300;
+  margin-top: 6rem;
+}
+
+ul.ui.list li, ol.ui.list li, .ui.list > .item, .ui.list .list > .item{
+  padding: 0.5em 0em;
+}

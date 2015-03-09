@@ -1,0 +1,29 @@
+<% provide(:title, "Forgot password") %>
+<h1 class="text-center">Sign in to :ticketbox</h1>
+<br />
+
+<div class="row">
+    <div class="column">
+    </div>
+    <div class="one wide column">
+        <%= form_for(:password_reset, url: password_resets_path, :html => {:class => "ui fluid"}) do |f| %>
+          <div class="ui form stack segment">
+              <div class="field">
+                  <%= f.label :email %>
+              	  <div class="ui left labeled icon input">
+              	    <%= f.text_field :email %>
+              	    <i class="user icon"></i>
+              	    <div class="ui corner label">
+              	      <i class="icon asterisk"></i>
+              	    </div>
+              	  </div>
+              </div>
+              <div class="field">
+                <%= f.submit "Submit", class: "ui teal submit fluid button" %>
+              </div>
+          </div>
+          <% end %>
+    </div>
+	<div class="column">
+	</div>
+</div>

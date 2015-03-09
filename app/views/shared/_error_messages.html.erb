@@ -1,0 +1,13 @@
+<% if target.errors.any? %>
+  <div class="ui negative message">
+    <i class="close icon"></i>
+    <div class="header">
+      The form contains <strong><%= pluralize(target.errors.count, "error") %></strong>.
+    </div>
+    <ul class="list">
+    <% target.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

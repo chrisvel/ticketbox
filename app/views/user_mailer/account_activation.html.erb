@@ -1,0 +1,10 @@
+<h1>:ticketbox</h1>
+
+<p>Hi <%= @user.firstname %>,</p>
+
+<p>
+Welcome to the :ticketbox App! Click on the link below to activate your account:
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>

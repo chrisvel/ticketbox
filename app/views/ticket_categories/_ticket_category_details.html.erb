@@ -1,0 +1,36 @@
+<div class="ui grid">
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+      <tbody>
+        <tr>
+          <td class="four wide column">Name</td>
+          <td class="ten wide column">
+            <%= @ticket_category.name if @ticket_category.name %>
+          </td>
+        </tr>
+        <tr>
+          <td>Amount</td>
+          <td>
+            <div class="ui circular blue label">
+              <%= @ticket_category.tickets.count %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Assigned by</td>
+          <td>
+            <%= link_to @ticket_category.owner, { :class => 'table_link'} do %>
+            <%= @ticket_category.owner.avatar.blank? ? 
+              image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+              image_tag(@ticket_category.owner.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+              %>
+            <%= @owner_fullname %>
+            <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="eight wide column">
+    
+  </div>
+</div>

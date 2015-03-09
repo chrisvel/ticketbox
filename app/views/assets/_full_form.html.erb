@@ -1,0 +1,121 @@
+<div class="ui top left attached teal label">
+	<% if @asset.id %>
+	  Edit ticket #<%= @asset.id %>
+  <% else %>
+	  New ticket
+  <% end %>
+</div>
+
+<%= @asset.recycled? ? 
+  ('<div class="ui top right attached green label">
+    <i class="trash icon"></i>RECYCLED</div>').html_safe() : "" %>
+
+<%= form_for(@asset, :html => {:class => "ui small form"}) do |f| %>
+  <div class="ui items">
+    <div class="item">
+      <div class="ui tiny image">
+        <%= @asset.user.blank? ? 
+              image_tag("no-image.png", alt: "noimage") :
+                @asset.user.avatar.blank? ? 
+                image_tag("no-image.png", alt: "noimage") :
+                image_tag(@asset.user.avatar.url(:medium))
+                %>
+      </div>
+      <div class="middle aligned content">
+        <div class="header"><%= @asset.serial.nil? ? "" : @asset.serial %></div>
+        <div class="meta">
+          <span class="cinema">
+            <%= @asset.brand.nil? ? "" : "#{@asset.brand} " %>
+            <%= @asset.kind.nil? ? "" : @asset.kind%>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <%= render 'shared/error_messages', :target => @asset %>
+  <div class="ticket-data" id="ticket-full-data"> 
+    <div class="field ui input fluid">
+      <%= f.label :serial %>
+      <%= f.text_field :serial, :class => "", :placeholder => "Enter serial number, service tag or license no" %>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :brand %>
+        <%= f.text_field :brand, :class => "", :placeholder => "Enter brand name" %>
+      </div>
+      <div class="field">
+        <%= f.label :model %>
+        <%= f.text_field :kind, :class => "", :placeholder => "Enter model name" %>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :ware %>
+        <%= f.select(:ware,options_for_ware, {}, :class => "ui fluid dropdown")  %>
+      </div>
+      <div class="field">
+        <%= f.label :date_acquired %>
+        <%= f.text_field :date_acquired, :class => "datepicker datetime-text" %>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :user_id %>
+        <%= f.select(:user_id, 
+          @users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
+          {}, 
+          :class => "ui fluid search dropdown"
+          ) %>
+      </div>
+      <div class="field">
+        <%= f.label :owner_id %>
+        <input placeholder="<%= @asset.owner.blank? ? 
+          current_user.lastname+','+current_user.firstname : 
+          @asset.owner.lastname+','+@asset.owner.firstname %>"
+          readonly="readonly" type="text" >
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :asset_location_id %>
+        <div class="description">
+          <%= f.select(:asset_location_id, 
+            @asset_locations.map{|s|[s.name, s.id]}, 
+            {}, 
+            :class => "ui fluid dropdown"
+            ) %>
+        </div>
+      </div>
+      <div class="inline field">
+        <label></label>
+        <div class="description">
+          <div class="ui toggle checkbox">
+            <%= f.check_box(:recycled, :type => 'checkbox')  %>
+            <%= f.label :recycled %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :comment %>
+      <div class="description">
+        <%= f.text_area :comment, :class => "textarea", :placeholder => "Comment" %>
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <div class="field">
+    <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
+     @asset, :class => "ui small labeled icon button", id: "btn-ticket-close" %>
+    <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
+        <i class="save icon"></i> Save changes
+    <% end %>
+    <%= link_to '<i class="delete icon"></i> Delete'.html_safe(), 
+      @asset, 
+      method: :delete, 
+      data: { confirm: 'Are you sure?' }, 
+      :class =>"ui red small icon labeled button" if @asset.id %>
+  </div>
+<% end %>
+

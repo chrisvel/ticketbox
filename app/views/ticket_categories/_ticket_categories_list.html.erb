@@ -1,0 +1,54 @@
+<table class="ui compact small padded table pure segment sortable">
+  <thead>
+    <tr>
+      <th class="text-center">Category</th>
+      <th class="text-center">Tickets</th>
+      <th class="text-center">Owner</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ticket_categories_all.each do |ticket_category| %>
+      <tr>
+        <td><%= link_to ticket_category.name, 
+                ticket_category, 
+                { :class => 'table_link'} 
+                %>
+        </td>
+        <td class="text-center">
+          <div class="ui circular teal label">
+            <%= ticket_category.tickets ? 
+                ticket_category.tickets.count : 
+                "-" 
+                %>
+          </div>
+        </td>
+        <td class="text-center">
+            <%= ticket_category.owner.nil? ? " " : 
+            ticket_category.owner.lastname + 
+            ', ' + ticket_category.owner.firstname%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="6">
+        <div class="row">  
+          <div class="ui two column grid">
+            <div class="column">
+              <div class="info-pagination">
+                <%= page_entries_info @ticket_categories_all %>
+              </div>
+              <%= will_paginate @ticket_categories_all %>
+            </div>
+            <div class="column right aligned">
+              <%= link_to '<i class="plus icon"></i> New Ticket Category'.html_safe(), 
+                new_ticket_category_path, { :class => "ui small teal icon labeled button"} %>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>

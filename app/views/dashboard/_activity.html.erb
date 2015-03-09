@@ -1,0 +1,39 @@
+<div class="ui top left attached teal label">Latest activity</div>
+
+<% if @activities.count >0 %>
+  
+  <div class="ui small feed">
+    <% @activities.limit(5).each do |activity| %>
+        <div class="event">
+          <div class="label">
+            <%= activity.owner.avatar.blank? ? 
+              image_tag("no-image.png", alt: "noimage", 
+                class: "ui avatar image avatar-popup") :
+              image_tag(activity.owner.avatar.url(:thumb), 
+                alt: "user-image", 
+                class: "ui avatar image avatar-popup") 
+              %>
+          </div>
+          <div class="content">
+            <div class="date">
+              <%= time_ago_in_words(activity.created_at) %> ago
+            </div>
+            <div class="summary">
+              <%= link_to activity.owner.get_owner_fullname, 
+                activity.owner if activity.owner %>
+              <%= render_activity activity %>
+              for 
+              <%= link_to activity.recipient.get_user_fullname, 
+                activity.recipient if activity.recipient %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
+<% else %>
+  <div class="ui list">
+    No activity yet
+  </div>
+
+<% end %>

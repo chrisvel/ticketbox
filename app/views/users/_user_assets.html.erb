@@ -1,0 +1,49 @@
+<table class="ui compact small padded table green segment">
+  <thead>
+    <tr>
+      <th class="text-center">Serial</th>
+      <th class="text-center">User</th>
+      <th class="text-center">Brand</th>
+      <th class="text-center">Kind</th>
+      <th class="text-center">Date acquired</th>
+      <th class="text-center">Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_assets.each do |asset| %>
+      <tr>
+        <td class="text-center">
+          <%= link_to (asset.serial.nil? ? "N/A" : 
+            truncate(asset.serial, length: 18)), asset, {:class => "table_link"}  %>
+        </td>
+        <td>
+          <%= asset.user.blank? ? "Spare" : "#{asset.user.lastname} , #{asset.user.firstname}" %>
+        </td>
+        <td class="text-center"><%= asset.brand.blank? ? "-" : asset.brand %></td>
+        <td class="text-center"><%= asset.kind.blank? ? "-" : truncate(asset.kind, length: 25) %></td>
+        <td class="text-center"><%= time_ago_in_words(asset.date_acquired) if asset.date_acquired %></td>
+        <td><%= asset.asset_location.name if asset.asset_location %></td>
+        <!-- <td class="text-center"><%= status_tag(asset.recycled) %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="6">
+        <div class="row">  
+          <div class="ui two column grid">
+            <div class="column">
+              <div class="info-pagination">
+                <%= page_entries_info @user_assets %>
+              </div>
+              <%= will_paginate @user_assets %>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>
+
+
+

@@ -1,0 +1,36 @@
+<div class="ui grid">
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+      <tbody>
+        <tr>
+          <td class="four wide column">Name</td>
+          <td class="ten wide column">
+            <%= @group.name if @group.name %>
+          </td>
+        </tr>
+        <tr>
+          <td>Members</td>
+          <td>
+            <div class="ui circular blue label">
+              <%= @group.users.count %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Assigned by</td>
+          <td>
+            <%= link_to @group.owner, { :class => 'table_link'} do %>
+            <%= @group.owner.avatar.blank? ? 
+              image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+              image_tag(@group.owner.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+              %>
+            <%= @owner_fullname %>
+            <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="eight wide column">
+
+  </div>
+</div>

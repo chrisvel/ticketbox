@@ -1,0 +1,42 @@
+<% provide(:title, "Log in") %>
+
+<div class="ui grid login-page-background">
+  <h1 class="text-center ui header inverted">Sign in to :ticketbox</h1>
+	<div class="five wide column">
+	</div>
+  <div class="six wide column">
+  	<%= form_for(:session, url: sessions_path, 
+      :html => {:class => "ui form", :id => "login-page"}) do |f| %>
+  	  <div class="ui segment">
+      	  <div class="field">
+      	    <%= f.label :email %>
+      	    <%= f.text_field :email %>
+      	  </div>
+      	  <div class="field">
+      	    <%= f.label :password do %>
+              Password
+              <%= link_to "(forgot password)", new_password_reset_path %>
+            <% end %>
+      	    <%= f.password_field :password %>
+    	    </div>
+          <div class="field">
+              <%= f.label :remember_me, class: "checkbox inline" do %>
+                <%= f.check_box :remember_me %>
+                <span>Remember me on this computer</span>
+              <% end %>
+          </div>
+      	  <div class="ui error message">
+      	    <div class="header">We noticed some issues</div>
+      	  </div>
+          <div class="field">
+            <%= f.submit "Sign in", class: "ui teal submit fluid button" %>
+          </div>
+          <div class="field">
+            <label>New user? <%= link_to "Sign up now!", signup_path %></label>
+          </div>
+      </div>
+	<% end %>
+	</div>
+	<div class="five wide column">
+	</div>
+</div>

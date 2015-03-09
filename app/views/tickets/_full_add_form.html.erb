@@ -1,0 +1,110 @@
+<div class="ui top left attached teal label">
+	<% if @ticket.id %>
+	  Edit ticket #<%= @ticket.id %>
+  <% else %>
+	  New ticket
+  <% end %>
+</div>
+
+<%= form_for(@ticket, :html => {:class => "ui small form"}) do |f| %>
+  <div class="ui items">
+    <div class="item">
+      <div class="ui tiny image">
+        <%= @ticket.user.blank? ? 
+              image_tag("no-image.png", alt: "noimage") :
+                @ticket.user.avatar.blank? ? 
+                image_tag("no-image.png", alt: "noimage") :
+                image_tag(@ticket.user.avatar.url(:medium))
+                %>
+      </div>
+      <div class="middle aligned content">
+        <div class="header"><%= @ticket.issue %></div>
+        <div class="meta">
+          <span class="cinema">
+            <%= @ticket.ticket_category.name if @ticket.ticket_category %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <%= render 'shared/error_messages', :target => @ticket %>
+  <div class="ticket-data" id="ticket-full-data"> 
+    <div class="field ui input fluid">
+      <%= f.label :issue %>
+      <%= f.text_field :issue, :placeholder => "Enter short description" %>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :ticket_category_id %>
+        <%= f.select(:ticket_category_id, 
+          @ticket_categories.map{|s|[s.name, s.id]}, {}, 
+          :class => "ui fluid search dropdown") %>
+      </div>
+      <div class="field">
+        <%= f.label :user_id %>
+        <%= f.select(:user_id, 
+          @users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
+          {}, 
+          :class => "ui fluid search dropdown"
+          ) %>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :severity %>
+        <%= f.select(:severity,options_for_priority, {}, 
+          :class => "ui fluid search dropdown")  %>
+      </div>
+      <div class="field">
+        <%= f.label :status %>
+        <%= f.select(:status, options_for_status, {}, 
+          :class => "ui fluid search dropdown", :id => "ticket-status") %>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :date_opened %>
+        <%= f.text_field :date_opened, 
+          :value => 
+	  	    @ticket.id ? 
+			    f.object.date_opened.strftime('%Y-%m-%d %H:%m') :
+			    DateTime.now.strftime('%Y-%m-%d %H:%m'), 
+          :class => "datetimepicker datetime-text" 
+          %>
+      </div>
+      <div class="field">
+        <%= f.label :date_closed %>
+        <%= f.text_field :date_closed, 
+          :value => (f.object.date_closed.strftime('%Y-%m-%d %H:%m') if f.object.date_closed), 
+          :class => "datetimepicker datetime-text",
+          :id => "ticket-date-closed"
+          %>
+      </div>
+    </div>
+    <div class="ui two fields">
+      <div class="field">
+        <%= f.label :explanation %>
+        <%= f.text_area :explanation, :class => "textarea", :placeholder => "Description" %>
+      </div>
+      <div class="field">
+        <%= f.label :remedy %>
+        <%= f.text_area :remedy, :class => "textarea", :placeholder => "Remedy", :id => "ticket-remedy" %>
+      </div>
+    </div>
+    <div class="ui divider"></div>
+    <div class="field">
+      <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
+       @ticket, :class => "ui small labeled icon button", id: "btn-ticket-close" %>
+      <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
+          <i class="save icon"></i> Save changes
+      <% end %>
+      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(), 
+        @ticket, 
+        method: :delete, 
+        data: { confirm: 'Are you sure?' }, 
+        :class =>"ui red small icon labeled button" if @ticket.id %>
+    </div>
+  </div>
+<% end %>
+

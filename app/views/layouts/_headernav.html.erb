@@ -1,0 +1,19 @@
+  <% if logged_in? %>
+    <div class="ui small teal inverted menu header-sub-menu">
+      <%= 'active item' if params[:controller] == 'tickets' %>
+          <%= link_to "Tickets", tickets_path, :class => "item" %>
+      <%= 'active item' if params[:controller] == 'ticket_categories' %>
+          <%= link_to "Ticket categories", ticket_categories_path, :class => "item" %>
+      <%= 'active item' if params[:controller] == 'assets' %>
+          <%= link_to "Assets", assets_path, :class => "item" %>
+      <%= 'active item' if params[:controller] == 'locations' %>
+          <%= link_to "Asset Locations", asset_locations_path, :class => "item" %>
+      <%= 'active item' if params[:controller] == 'users' %>
+          <%= link_to "Users", users_path, :class => "item" %>
+      <%= 'active item' if params[:controller] == 'groups' %>
+          <%= link_to "Groups", groups_path, :class => "item" %>
+      <%= 'active item' if params[:controller] == 'businesses' %>
+          <%= link_to "Businesses", businesses_path, :class => "item" %>
+    </div>
+  <% end %>
+</header>

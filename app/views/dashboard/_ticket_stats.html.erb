@@ -1,0 +1,41 @@
+<div class="ui top left attached teal label">Ticket stats</div>
+
+<table class="ui compact pure table">
+  <tbody>
+    <tr class="">
+      <td><div class="ui tiny header">Total</div></td>
+      <td class="text-right">
+        <div class="ui horizontal tiny label">
+          <%= current_user.tickets.count %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><div class="ui tiny header">Unsolved</div></td>
+      <td class="text-right">
+        <div class="ui horizontal tiny label">
+          <%= current_user.tickets.all_unsolved.count %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><div class="ui tiny header">Open</div></td>
+      <td class="text-right">
+        <div class="ui horizontal tiny label">
+          <%= current_user.tickets.all_opened.count %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><div class="ui tiny header">In progress</div></td>
+      <td class="text-right">
+        <div class="ui horizontal tiny label">
+          <%= current_user.tickets.all_in_progress.count %>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+  
+  </tfoot>
+</table>

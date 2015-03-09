@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serial: MyString
+  brand: MyString
+  type: 
+  date_acquired: 2014-10-09
+  user_id: 1
+  comment: MyText
+  ware: MyString
+  location_id: 1
+  recycled: false
+  owner_id: 1
+
+two:
+  serial: MyString
+  brand: MyString
+  type: 
+  date_acquired: 2014-10-09
+  user_id: 1
+  comment: MyText
+  ware: MyString
+  location_id: 1
+  recycled: false
+  owner_id: 1

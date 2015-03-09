@@ -1,0 +1,43 @@
+<% provide(:title, "Reset password") %>
+<h1 class="text-center">Reset :ticketbox password</h1>
+<br />
+<div class="row">
+    <div class="column">
+    </div>
+    <div class="one wide column">
+        <%= form_for(@user, url: password_reset_path(params[:id]),
+            :html => {:class => "ui fluid"}) do |f| %>
+          <%= render 'shared/error_messages' %>
+          <%= hidden_field_tag :email, @user.email %>
+          
+          <div class="ui form stack segment">
+              <div class="field">
+                  <%= f.label :password %>
+              	  <div class="ui left labeled icon input">
+              	    <%= f.password_field :password, class: '' %>
+              	    <i class="user icon"></i>
+              	    <div class="ui corner label">
+              	      <i class="icon asterisk"></i>
+              	    </div>
+              	  </div>
+              </div>
+              <div class="field">
+                  <%= f.label :password_confirmation, "Confirmation" %>
+              	  <div class="ui left labeled icon input">
+              	    <%= f.password_field :password_confirmation, class: '' %>
+              	    <i class="user icon"></i>
+              	    <div class="ui corner label">
+              	      <i class="icon asterisk"></i>
+              	    </div>
+              	  </div>
+              </div>
+              <div class="field">
+                <%= f.submit "Update password", 
+                class: "ui teal submit fluid button" %>
+              </div>
+          </div>
+          <% end %>
+    </div>
+	<div class="column">
+	</div>
+</div>

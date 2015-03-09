@@ -1,0 +1,51 @@
+<% provide(:title, 'Tickets') %>
+
+<div class="row">
+  <div class="four wide column">
+    <%= render 'layouts/sidebar' %>
+  </div>
+  <div class="twelve wide column">
+    <div class="ui segment ticket-show">
+      
+      <div class="ui top left attached teal label">
+        Ticket #<%= @ticket.id %>
+      </div>
+      
+      <div class="ui items">
+        <div class="item">
+          <div class="ui tiny image">
+            <%= @ticket.user.avatar.blank? ? 
+              image_tag("no-image.png", alt: "noimage") :
+              image_tag(@ticket.user.avatar.url(:medium)) 
+              %>
+          </div>
+          <div class="middle aligned content">
+            <div class="header"><%= @ticket.issue %></div>
+            <div class="meta">
+              <span class="cinema">
+                <%= @ticket.ticket_category.name if @ticket.ticket_category %>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      
+      <div class="ui grid">
+        <div class="sixteen wide column">
+          <%= render partial: 'ticket_details' %>
+        </div>
+      </div>
+      
+      <div class="ui divider"></div>
+      
+      <div class="">
+        <%= link_to '<i class="left chevron icon"></i> Back'.html_safe(), 
+          tickets_path, :class => "ui labeled tiny icon button" %>
+        <%= link_to '<i class="pencil icon"></i> Edit'.html_safe(),
+          edit_ticket_path(@ticket), :class => "ui labeled tiny icon teal button"%>
+      </div>
+    </div>
+  </div>
+</div>
+

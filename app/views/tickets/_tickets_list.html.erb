@@ -1,0 +1,62 @@
+<%= render 'quick_add_form' %>
+
+<table class="ui compact small padded table segment pure sortable">
+  <div class="ui divider"></div>
+  <thead>
+    <tr>
+      <th></th>
+      <th class="text-left">Issue</th>
+      <th class="text-left">Status</th>
+      <th class="text-left collapsing">Category</th>
+      <th class="text-center">Requester</th>
+      <th></th>
+      <th class="text-center collapsing">Pending for</th>
+      <th class="text-center">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_unsolved.each do |ticket| %>
+      <tr class="">
+        <td class="text-center"><%= check_ticket_priority(ticket.severity) %></td>
+        <td>
+          <%= link_to ticket.issue, ticket, { :class => 'table_link'} %>
+          <br /><small><%= ticket.explanation %></small></td>
+        <td class="text-left collapsing"><%= check_ticket_status(ticket.status) %></td>
+        <td class="text-left collapsing">
+            <%= ticket.ticket_category.name if ticket.ticket_category %> 
+        </td>
+        <td class="text-right collapsing">
+          <%= "#{ticket.user.lastname}, #{ticket.user.firstname}" %>
+        </td>
+        <td class="text-center">
+          <%= ticket.user.avatar.blank? ? 
+            image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+            image_tag(ticket.user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            %>
+        </td>
+        <td class="text-center collapsing"><%= time_ago_in_words(ticket.date_opened) %></td>
+        <td class="text-center"><%= ticket.id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="8">
+        <div class="row">  
+          <div class="ui two column grid">
+            <div class="column">
+              <div class="info-pagination">
+                <%= page_entries_info @all_unsolved %>
+              </div>
+              <%= will_paginate @all_unsolved %>
+            </div>
+            <div class="column right aligned">
+              <%= link_to '<i class="ticket icon"></i> New Ticket'.html_safe(), 
+                new_ticket_path, { :class => "ui tiny teal icon labeled button"} %>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>

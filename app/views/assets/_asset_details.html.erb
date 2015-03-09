@@ -1,0 +1,78 @@
+<div class="ui grid">
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+      <tbody>
+        <tr>
+          <td class="three wide column">Serial</td>
+          <td class="eleven wide column">
+            <%= @asset.serial.nil? ? "-" : @asset.serial %>
+          </td>
+        </tr>
+        <tr>
+          <td>Brand</td>
+          <td><%= @asset.brand.nil? ? "-" : @asset.brand %></td>
+        </tr>
+        <tr>
+          <td>Model</td>
+          <td><%= @asset.kind.nil? ? "-" : @asset.kind %></td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td><%= @asset.ware.nil? ? "-" : @asset.ware %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+    <tbody>
+      <tr>
+        <td>User</td>
+        <td>
+          <%= link_to @asset.user, { :class => 'table_link'} do %>
+          <%= @asset.user.avatar.blank? ? 
+            image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+            image_tag(@asset.user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            %>
+          <%= @user_fullname %>
+          <% end %>
+      </tr>
+      <tr>
+        <td>Assigned by</td>
+        <td>
+          <%= link_to @asset.owner, { :class => 'table_link'} do %>
+          <%= @asset.owner.avatar.blank? ? 
+            image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+            image_tag(@asset.owner.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            %>
+          <%= @owner_fullname %>
+          <% end %>
+      </tr>
+      <tr>
+        <td>Acquired before</td>
+        <td>
+          <%= @asset.date_acquired.nil? ? "-" : "#{time_ago_in_words(@asset.date_acquired)} ago." %>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td><%= @asset.asset_location.nil? ? "-" : @asset.asset_location.name %></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="sixteen wide column">
+    <table class="ui small definition blue table">
+    <tbody>
+      <tr>
+        <td class="two wide column">Comment</td>
+        <td class="twelve wide column">
+          <%= @asset.comment.empty? ? "No comment" : @asset.comment %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

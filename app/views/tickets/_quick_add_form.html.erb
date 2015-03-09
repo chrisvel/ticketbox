@@ -1,0 +1,71 @@
+<%= form_for(@ticket, :html => {:class => "ui small form"}) do |f| %>
+  <div class="ui input ticket-new-box">
+     <%= f.text_field :issue, 
+                      :class => "issue-text basic-input", 
+                      :placeholder => "Type to create new ticket", 
+                      :id => "ticket-input" 
+                      %>
+  </div>
+  <%= render 'shared/error_messages', :target => @ticket %>
+  <div class="ticket-data" id="ticket-quick-data"> 
+      <div class="ui segment">
+        <div class="ui three fields">
+          <div class="field">
+            <%= f.label :status %>
+            <%= f.select(
+              :status, 
+              options_for_status, 
+              {}, 
+              :class => "ui small dropdown", 
+              :id => "ticket-status") 
+              %>
+          </div>
+          <div class="field">
+            <%= f.label :user_id %>
+            <%= f.select(:user_id, 
+              @users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
+              {}, 
+              :class => "ui search dropdown"
+              ) %>
+          </div>
+          <div class="field">
+            <%= f.label :date_opened %>
+            <%= f.text_field :date_opened, :class => "datetimepicker datetime-text" %>
+          </div>
+        </div>
+        <div class="ui three fields">
+          <div class="field">
+            <%= f.label :severity %>
+            <%= f.select(:severity,options_for_priority, {}, :class => "ui dropdown")  %>
+          </div>
+          <div class="field">
+            <%= f.label :ticket_category_id %>
+            <%= f.select(:ticket_category_id, @ticket_categories.map{|s|[s.name, s.id]}, {}, :class => "ui search dropdown") %>
+          </div>
+          <div class="field">
+            <%= f.label :date_closed %>
+            <%= f.text_field :date_closed, :class => "datetimepicker datetime-text", :id => "ticket-date-closed" %>
+          </div>
+        </div>
+        <div class="ui two fields">
+          <div class="field">
+            <%= f.label :explanation %>
+            <%= f.text_area :explanation, :class => "textarea", :placeholder => "Description" %>
+          </div>
+          <div class="field">
+            <%= f.label :remedy %>
+            <%= f.text_area :remedy, :class => "textarea", :placeholder => "Remedy", :id => "ticket-remedy" %>
+          </div>
+        </div>
+        <div class="field">
+          <%= link_to '<i class="cancel icon"></i> Cancel'.html_safe(),
+           "#", :class => "ui small labeled icon button", id: "btn-ticket-close" %>
+          <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
+              <i class="save icon"></i> Save changes
+          <% end %>
+        </div>
+        <div class="ui divider"></div>
+      </div>
+    </div>
+<% end %>
+

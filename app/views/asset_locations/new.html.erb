@@ -1,0 +1,13 @@
+<% provide(:title, 'Add new asset location') %>
+<% if logged_in? %>
+  <div class="row">
+    <div class="four wide column">
+      <%= render 'layouts/sidebar' %>
+    </div>
+    <div class="twelve wide column ticket-show">
+      <div class="ui segment">
+        <%= render 'full_add_form' %>
+      </div>
+    </div>
+  </div>
+<% end %>

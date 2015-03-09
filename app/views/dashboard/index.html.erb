@@ -1,0 +1,13 @@
+<%= include_gon if defined? gon && gon.present? %>
+
+<% provide(:title, 'Dashboard') %>
+<% if logged_in? %>
+  <div class="row">
+    <div class="four wide column">
+      <%= render 'layouts/sidebar' %>
+    </div>
+    <div class="twelve wide column ticket-show">
+      <%= render 'main' %>
+    </div>
+  </div>
+<% end %>
