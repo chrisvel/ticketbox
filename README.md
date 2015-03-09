@@ -11,11 +11,11 @@
 
 ![](https://farm9.staticflickr.com/8599/16711063632_cf26837c30_z.jpg)
 
-![](https://farm9.staticflickr.com/8570/16092174483_f8678d44df.jpg)
+![](https://farm9.staticflickr.com/8570/16092174483_f8678d44df_z.jpg)
 
-![](https://farm9.staticflickr.com/8647/16525992599_15e4a04177.jpg)
+![](https://farm9.staticflickr.com/8647/16525992599_15e4a04177_z.jpg)
 
-![](https://farm9.staticflickr.com/8629/16710833041_fd51e7eeee.jpg)
+![](https://farm9.staticflickr.com/8629/16710833041_fd51e7eeee_z.jpg)
 
 ## Requirements
 
