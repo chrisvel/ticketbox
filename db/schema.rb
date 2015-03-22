@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20141212102217) do
 
-  create_table "activities", force: true do |t|
+  create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
     t.string   "trackable_type", limit: 255
     t.integer  "owner_id",       limit: 4
@@ -30,14 +30,14 @@ ActiveRecord::Schema.define(version: 20141212102217) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "asset_locations", force: true do |t|
+  create_table "asset_locations", force: :cascade do |t|
     t.string  "name",     limit: 100, null: false
     t.integer "owner_id", limit: 4,   null: false
   end
 
   add_index "asset_locations", ["owner_id"], name: "assets_assetlocation_cb902d83", using: :btree
 
-  create_table "assets", force: true do |t|
+  create_table "assets", force: :cascade do |t|
     t.string  "serial",            limit: 100,        null: false
     t.string  "brand",             limit: 100,        null: false
     t.string  "kind",              limit: 100,        null: false
@@ -53,14 +53,14 @@ ActiveRecord::Schema.define(version: 20141212102217) do
   add_index "assets", ["asset_location_id"], name: "assets_afbb987d", using: :btree
   add_index "assets", ["owner_id"], name: "assets_cb902d83", using: :btree
 
-  create_table "businesses", force: true do |t|
+  create_table "businesses", force: :cascade do |t|
     t.string  "name",     limit: 100, null: false
     t.integer "owner_id", limit: 4,   null: false
   end
 
   add_index "businesses", ["owner_id"], name: "assets_business_cb902d83", using: :btree
 
-  create_table "groups", force: true do |t|
+  create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.integer  "owner_id",   limit: 4
     t.integer  "user_id",    limit: 4
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20141212102217) do
     t.datetime "updated_at"
   end
 
-  create_table "memberships", force: true do |t|
+  create_table "memberships", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "typeof",     limit: 255
     t.integer  "user_id",    limit: 4
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20141212102217) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "level",      limit: 255
     t.integer  "user_id",    limit: 4
@@ -88,14 +88,14 @@ ActiveRecord::Schema.define(version: 20141212102217) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "ticket_categories", force: true do |t|
+  create_table "ticket_categories", force: :cascade do |t|
     t.string  "name",     limit: 100, null: false
     t.integer "owner_id", limit: 4,   null: false
   end
 
   add_index "ticket_categories", ["owner_id"], name: "assets_ticketcategory_cb902d83", using: :btree
 
-  create_table "tickets", force: true do |t|
+  create_table "tickets", force: :cascade do |t|
     t.integer  "ticket_category_id", limit: 4,   null: false
     t.string   "issue",              limit: 100, null: false
     t.integer  "user_id",            limit: 4
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20141212102217) do
   add_index "tickets", ["ticket_category_id"], name: "assets_ticket_6f33f001", using: :btree
   add_index "tickets", ["user_id"], name: "assets_ticket_6340c63c", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "firstname",           limit: 100,                 null: false
     t.string   "lastname",            limit: 100,                 null: false
     t.string   "username",            limit: 18,                  null: false

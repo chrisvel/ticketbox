@@ -30,6 +30,14 @@
 
 Plus lots of Ruby Gems, a complete list of which is at the *root* folder of the project.
 
+## Instructions
+
+First create the database:
+` rake db:create `
+
+Then create the tables:
+ `rake db:schema:load` 
+
 ## Contributing
 
 :ticketbox is **100% free** and **open-source**. We encourage and support an active, healthy community that
