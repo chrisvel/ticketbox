@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  
+
   force_ssl
-  
+
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :owner_delete,   only: :destroy
@@ -17,13 +17,13 @@ class UsersController < ApplicationController
       if current_user.owner.business
         @businesses = current_user.owner.business.name
       end
-      
+
       respond_to do |format|
         format.html { render @users }
         format.json { render json: @tickets_unsolved }
-        format.js 
+        format.js
       end
-      
+
     else
       flash[:red] = "Please sign in."
       redirect_to login_url
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         .paginate(page: params[:page])
       @user_assets = Asset.where(:user => @user).order('serial ASC')
         .paginate(page: params[:page])
-        
+
     else
       flash[:red] = "Please sign in."
       redirect_to login_url
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     @groups = current_user.owner.groups
     @user = User.new
   end
-  
+
   # POST /users
   def create
     if current_user
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
         flash[:green] = "User created!"
         redirect_to users_path
       else
-        render root_path
+        redirect_to root_path
       end
     else
       @user = User.new(user_params)
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
       redirect_to login_url
     end
   end
-  
+
   # PATCH/PUT /users/1
   def update
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
@@ -115,25 +115,25 @@ class UsersController < ApplicationController
     flash[:green] = "User deleted."
     redirect_to users_url
   end
-  
+
   # /signup
   def signup
     @user = User.new
   end
 
   private
-  
+
     def owner_delete
       redirect_to(root_url) unless current_user.id == @user.owner.id
-    end 
+    end
 
     def user_params
       params.require(:user).permit(
         :firstname,
         :lastname,
-        :username, 
-        :email, 
-        :password, 
+        :username,
+        :email,
+        :password,
         :password_confirmation,
         :business_id,
         :leaver,
@@ -152,5 +152,5 @@ class UsersController < ApplicationController
       @user = current_user.users.find_by(id: params[:id])
       redirect_to root_url if @user.nil?
     end
-    
+
 end
