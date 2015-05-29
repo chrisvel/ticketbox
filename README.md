@@ -32,6 +32,8 @@ Plus lots of Ruby Gems, a complete list of which is at the *root* folder of the 
 
 ## Instructions
 
+Please don't freak out by the absence of tests. I am currently building my knowledge and soon I will add lots of them. 
+
 First create the database:
 ` rake db:create `
 
