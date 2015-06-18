@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   around_filter :user_time_zone, if: :current_user
   
   protect_from_forgery with: :exception
+  before_action :authenticate_user!
+  
   include SessionsHelper
   
   private

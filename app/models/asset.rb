@@ -1,10 +1,10 @@
 class Asset < ActiveRecord::Base
   include PublicActivity::Model
-  tracked owner: ->(c,m){ m.owner }, recipient: ->(c,m){ m.user }
+  tracked user: ->(c,m){ m.user }, recipient: ->(c,m){ m.user }
   
   belongs_to :user
   belongs_to :asset_location
-  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
+  belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
   
   validates :serial,  presence: true,  length: { minimum: 2, maximum: 30 }
   validates :brand,  presence: true,  length: { minimum:2, maximum: 18 }, format: { with: /\A[a-zA-Z0-9 ]+\z/, message: "only allows letters and numbers" }

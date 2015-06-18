@@ -1,0 +1,43 @@
+<h2>Log in</h2>
+
+<% provide(:title, "Log in") %>
+
+<div class="ui grid login-page-background">
+  <h1 class="text-center ui header inverted">Sign in to :ticketbox</h1>
+	<div class="five wide column">
+	</div>
+  <div class="six wide column">
+  	<%= form_for(resource, as: resource_name, url: session_path(resource_name),
+      :html => {:class => "ui form", :id => "login-page"}) do |f| %>
+  	  <div class="ui segment">
+      	  <div class="field">
+      	    <%= f.label :email %>
+      	    <%= f.text_field :email, autofocus: true %>
+      	  </div>
+      	  <div class="field">
+      	    <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: true%>
+    	    </div>
+          <div class="field">
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+          </div>
+      	  <div class="ui error message">
+      	    <div class="header">We noticed some issues</div>
+      	  </div>
+          <div class="field">
+            <%= f.submit "Sign in", class: "ui teal submit fluid button" %>
+          </div>
+          <div class="field">
+            <%= render "users/shared/links" %>
+          </div>
+      </div>
+	<% end %>
+	</div>
+	<div class="five wide column">
+	</div>
+</div>

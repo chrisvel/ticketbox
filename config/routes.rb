@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   # match '/signup',  to: 'users#signup',  via: 'get'  
   
-  get    'signup'    => 'users#signup'
-  get    'login'     => 'sessions#new'
-  post   'login'     => 'sessions#create'
-  delete 'logout'    => 'sessions#destroy'
   get    'dashboard' => 'dashboard#index'
   get    'intro'     => 'welcome#intro'
   
@@ -15,10 +12,6 @@ Rails.application.routes.draw do
   resources :businesses
   resources :asset_locations
   resources :assets
-  resources :users
-  resources :sessions,            only: [:new, :create, :destroy]
-  resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :memberships
   resources :roles
 

@@ -2,15 +2,13 @@ class UsersController < ApplicationController
 
   force_ssl
 
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :owner_delete,   only: :destroy
+  before_action :authenticate_user!
 
   # GET /users
   # GET /users.json
 
   def index
-    if logged_in?
+    if user_signed_in?
       @users_all = current_user.users.search(params[:search])
         .paginate(page: params[:page])
         .order('lastname ASC')
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if logged_in?
+    if user_signed_in?
       @users_all = current_user.users.order('lastname ASC')
       if current_user.owner.business
         @business = current_user.owner.business.name
@@ -84,7 +82,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if logged_in?
+    if user_signed_in?
       @users_all = current_user.users.paginate(page: params[:page]).order('lastname ASC')
       @owner = current_user
       @businesses = Business.where("owner_id = ?", current_user).order('name ASC')

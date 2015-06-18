@@ -1,6 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :authenticate_user!
 
   # GET /groups
   # GET /groups.json
@@ -108,11 +107,6 @@ class GroupsController < ApplicationController
         :user_id, 
         :owner_id
       )
-    end
-    
-    def correct_user
-      @group = current_user.groups.find_by(id: params[:id])
-      redirect_to root_url if @group.nil?
     end
     
 end

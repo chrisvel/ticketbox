@@ -2,7 +2,7 @@
     <div class="header item">
 	   <div class="">
 	       Signed in as
-		   <% if logged_in? %>  
+		   <% if user_signed_in? %>  
 		       <%= @current_user ? 
 		  	   "#{@current_user.lastname}, #{@current_user.firstname}" :
 		  	   "Guest" 

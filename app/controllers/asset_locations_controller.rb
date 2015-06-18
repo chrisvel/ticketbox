@@ -1,6 +1,5 @@
 class AssetLocationsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :authenticate_user!
 
   # GET /asset_locations
   # GET /asset_locations.json
@@ -95,9 +94,5 @@ class AssetLocationsController < ApplicationController
     def asset_location_params
       params.require(:asset_location).permit(:name, :owner_id)
     end
-    
-    def correct_user
-      @asset = current_user.assets.find_by(id: params[:id])
-      redirect_to root_url if @asset.nil?
-    end
+
 end

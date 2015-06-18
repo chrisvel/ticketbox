@@ -5,7 +5,8 @@
         :class => 'item',
         :id => 'logo'
       %>
-      <% if logged_in? %>
+    
+      <% if user_signed_in? %>
           <div class="ui mini icon teal labeled top left pointing dropdown button add-new">
             <i class="plus icon"></i>
             <span class="text">Add new item</span>
@@ -33,7 +34,7 @@
       <% end %>
       
       <div class="right menu">
-    		<% if logged_in? %>  
+    		<% if user_signed_in? %>  
             <div class="ui top right pointing dropdown item">
               <%= current_user.avatar.blank? ? 
                 image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
@@ -59,9 +60,14 @@
               </div>
             </div>
       	<% else %>
-            <%= link_to login_path, :class => "item top-menu-item" do  %>
+            <%= link_to new_user_session_path, :class => "item top-menu-item" do  %>
               Login
             <% end %>
+        <%= link_to destroy_user_session_path, :class => "item", :method => :delete do %>
+            <i class="sign out icon"></i> Logout
+        <% end %>
+        
+        
       	<% end %>
       </div>
     </div>

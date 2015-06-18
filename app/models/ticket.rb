@@ -1,10 +1,9 @@
 class Ticket < ActiveRecord::Base
   include PublicActivity::Model
-  tracked owner: ->(c,m){ m.owner }, recipient: ->(c,m){ m.user }
+  #tracked owner: ->(c,m){ m.owner }, recipient: ->(c,m){ m.user }
   
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :ticket_category, :foreign_key => 'ticket_category_id'
-  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
   self.table_name = "tickets"
   
   validates :issue,  presence: true,  length: { minimum:6, maximum: 300 }

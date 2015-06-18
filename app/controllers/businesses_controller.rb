@@ -1,6 +1,5 @@
 class BusinessesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :authenticate_user!
 
   # GET /businesses
   # GET /businesses.json
@@ -100,8 +99,4 @@ class BusinessesController < ApplicationController
       params.require(:business).permit(:name, :owner_id)
     end
     
-    def correct_user
-      @asset = current_user.assets.find_by(id: params[:id])
-      redirect_to root_url if @asset.nil?
-    end
 end

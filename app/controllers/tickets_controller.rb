@@ -2,8 +2,7 @@ class TicketsController < ApplicationController
   
   force_ssl
   
-  before_action :logged_in_user, only: [:index, :new, :create, :edit, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :authenticate_user!
   before_action :get_all_unsolved, 
                 :get_all_solved,
                 :get_all_tickets,
@@ -22,9 +21,9 @@ class TicketsController < ApplicationController
   end
 
   def show
-      @ticket = current_user.tickets.find(params[:id])
-      @user_fullname  = "#{@ticket.user.lastname}, #{@ticket.user.firstname}"
-      @owner_fullname = "#{@ticket.owner.lastname}, #{@ticket.owner.firstname}"
+    @ticket = current_user.tickets.find(params[:id])
+    @user_fullname  = "#{@ticket.user.lastname}, #{@ticket.user.firstname}"
+    @owner_fullname = "#{@ticket.owner.lastname}, #{@ticket.owner.firstname}"
   end
 
   def edit
@@ -121,11 +120,6 @@ class TicketsController < ApplicationController
         :remedy, 
         :owner_id
       )
-    end
-    
-    def correct_user
-      @ticket = current_user.tickets.find_by(id: params[:id])
-      redirect_to root_url if @ticket.nil?
     end
 
 end
