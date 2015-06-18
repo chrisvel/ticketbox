@@ -1,6 +1,6 @@
 class Asset < ActiveRecord::Base
-  include PublicActivity::Model
-  tracked user: ->(c,m){ m.user }, recipient: ->(c,m){ m.user }
+  #include PublicActivity::Model
+  #tracked user: ->(c,m){ m.user }, recipient: ->(c,m){ m.user }
   
   belongs_to :user
   belongs_to :asset_location

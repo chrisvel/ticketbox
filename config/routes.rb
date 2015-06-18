@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get    'dashboard' => 'dashboard#index'
   get    'intro'     => 'welcome#intro'
   
+  resources :users
   resources :groups
   resources :ticket_categories
   resources :tickets

@@ -1,0 +1,67 @@
+<% provide(:title, 'Users') %>
+
+<div class="ui grid">
+  <div class="sixteen wide column">
+    <h2 class="text-center">Sign up to :ticketbox</h2>
+  </div>
+</div>
+<div class="ui divider"></div>
+
+<div class="ui grid">
+	<div class="five wide column">
+	</div>
+  <div class="six wide column">
+		<%= form_for(@user, :html => {:class => "ui small form segment"}) do |f| %>
+			<%= render 'shared/error_messages', target: f.object %>
+
+			<div class="ui icon message">
+				<i class="user icon"></i>
+				<div class="content">
+				  <div class="header">
+					  Signing up to :ticketbox is very simple.
+				  </div>
+				  <p>
+				  	Just enter your ids below and press the "Create" button.
+				  </p>
+				</div>
+			</div>
+
+  	  <div class="ui segment">
+        <div class="field">
+    			<%= f.label :username %>
+    			<%= f.text_field :username,
+    	            :class => "",
+    	            :placeholder => "Enter username" %>
+        </div>
+        <div class="two fields">
+          <div class="field">
+            <strong><%= f.label :lastname %></strong>
+    		    <%= f.text_field :lastname, :class => "", :placeholder => "Enter last name" %>
+          </div>
+          <div class="field">
+    		    <strong><%= f.label :firstname %></strong>
+    		    <%= f.text_field :firstname, :class => "", :placeholder => "Enter first name" %>
+          </div>
+        </div>
+  	    <div class="field">
+  			  <strong><%= f.label :email %></strong>
+  		    <%= f.text_field :email, :class => "", :placeholder => "Enter email" %>
+        </div>
+        <div class="field">
+    			<strong><%= f.label :password %></strong>
+    			<%= f.password_field :password %>
+        </div>
+        <div class="field">
+    			<strong><%= f.label :password_confirmation, "Confirmation" %></strong>
+    			<%= f.password_field :password_confirmation %>
+        </div>
+  		  <div class="field">
+    			<%= f.submit "Create my account", class: "ui small teal button" %>
+        </div>
+      </div>
+
+		<% end %>
+	</div>
+  <div class="column">
+  </div>
+</div>

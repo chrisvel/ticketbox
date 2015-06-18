@@ -1,0 +1,58 @@
+<table class="ui compact small padded table pure segment sortable">
+  
+  <thead>
+    <tr>
+      <th></th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Business</th>
+      <th></th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users_all.each do |user| %>
+      <tr>
+        <td class="text-center">
+          <%= user.avatar.blank? ? 
+            image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
+            image_tag(user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            %>
+        </td>
+        <td><%= link_to user.username, user, { :class => 'table_link'} %></td>
+        <td class="important"><%= user.lastname %>, <%= user.firstname %></td>
+        <td><%= user.email %></td>
+        <td><%= user.business.name if user.business %></td>
+        <td><%= status_tag(!user.leaver) %></td>
+        <td><%= user.owner.lastname if user.owner %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+  <tfoot>
+    <tr>
+      <th colspan="7">
+        <div class="row">  
+          <div class="ui two column grid">
+            <div class="column">
+              <div class="info-pagination">
+                <%= page_entries_info @users_all %>
+              </div>
+              <%= will_paginate @users_all %>
+            </div>
+            <div class="column right aligned">
+              <%= link_to '<i class="user icon"></i> New User'.html_safe(), 
+                new_user_path, { :class => "ui tiny teal icon labeled button"} %>
+            </div>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>
+
+<br>
+
+

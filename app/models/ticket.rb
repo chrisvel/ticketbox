@@ -1,6 +1,6 @@
 class Ticket < ActiveRecord::Base
-  include PublicActivity::Model
-  #tracked owner: ->(c,m){ m.owner }, recipient: ->(c,m){ m.user }
+  #include PublicActivity::Model
+  #tracked owner: Proc.new{ |controller, model| controller.current_user }
   
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
   belongs_to :ticket_category, :foreign_key => 'ticket_category_id'

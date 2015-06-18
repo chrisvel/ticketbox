@@ -1,5 +1,5 @@
 class Group < ActiveRecord::Base
-  include PublicActivity::Model
+  #include PublicActivity::Model
   #tracked owner: ->(c,m){ m.owner }, recipient: ->(c,m){ m.owner }
   
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'

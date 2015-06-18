@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
  
   def index
     @activities = PublicActivity::Activity.order("created_at desc")
-    .where(user_id: current_user)
+    .where(owner_id: current_user)
     
     if !current_user.nil?
       

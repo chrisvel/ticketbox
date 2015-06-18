@@ -1,0 +1,140 @@
+<div class="ui top left attached teal label">
+	<% if @user.username %>
+	  Edit user #<%= @user.username %>
+  <% else %>
+	  New user
+  <% end %>
+</div>
+
+<%= form_for(@user, :html => {:class => "ui small form", id: "myForm"}) do |f| %>
+
+  <div class="ui items">
+    <div class="item">
+      <div class="ui tiny image">
+        <%= @user.blank? ? 
+              image_tag("no-image.png", alt: "noimage") :
+                @user.avatar.blank? ? 
+                image_tag("no-image.png", alt: "noimage") :
+                image_tag(@user.avatar.url(:medium))
+                %>
+      </div>
+      <div class="middle aligned content">
+        <div class="header"><%= @user.blank? ? @user.username : "New user" %></div>
+        <div class="meta">
+          <span class="cinema">
+            <%= @user.blank? ? @user.email : "" %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <%= render 'shared/error_messages', :target => @user %>
+  <div class="ticket-data" id="ticket-full-data"> 
+    <div class="field">
+      <%= f.label :avatar %>
+      <%= @user.avatar.blank? ? 
+        image_tag("no-image.png", alt: "noimage", class: "ui small rounded image") :
+        image_tag(@user.avatar.url(:thumb), alt: "user-image", class: "ui small rounded image") 
+        %>
+      <br />
+      <%= f.file_field :avatar %>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :username %>
+        <%= f.text_field :username, :placeholder => "Enter username",
+        :type => "text" %>
+      </div>
+      <div class="required field">
+        <%= f.label :email %>
+        <%= f.text_field :email, :placeholder => "Enter email" %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label "Full name" %>
+      <div class="two fields">
+        <div class="field">
+          <%= f.text_field :firstname, :placeholder => "Enter first name", 
+          :type => "text" %>
+        </div>
+        <div class="field">
+          <%= f.text_field :lastname, :placeholder => "Enter last name", 
+          :type => "text" %>
+        </div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <%= f.label :time_zone %>
+          <%= f.time_zone_select :time_zone, 
+            nil, 
+            {}, 
+            { :class => 'ui search dropdown' } 
+            %>
+        </div>
+        <% if logged_in? %>
+          <div class="field">
+            <%= f.label :group %>
+            <%= f.select(:group_id, 
+              @groups.map{|s|[s.name, s.id]}, 
+              {}, 
+              { :class => "ui search dropdown" }
+              ) %>
+          </div>
+        <% end %>
+      </div>
+      <div class="two fields">
+          <div class="field">
+            <%= f.label :landline_phone %>
+            <%= f.text_field :landline_phone, class: "phone_no", :placeholder => "Enter phone no" %>
+          </div>
+          <div class="field">
+            <%= f.label :mobile_phone %>
+            <%= f.text_field :mobile_phone, class: "phone_no", :placeholder => "Enter mobile no" %>
+          </div>
+      </div>
+      <div class="three fields">
+        <div class="field">
+          <%= f.label :department %>
+          <%= f.text_field :department, :placeholder => "Enter department" %>
+        </div>
+        <div class="field">
+          <%= f.label :position %>
+          <%= f.text_field :position, :placeholder => "Enter position" %>
+        </div>
+        <% if logged_in? %>
+          <div class="field">
+            <%= f.label :business %>
+            <%= f.select(:business_id, 
+              @businesses.map{|s|[s.name, s.id]}, 
+              {}, 
+              { :class => "ui search dropdown" }
+              ) %>
+          </div>
+        <% end %>
+      </div>
+      <div class="inline field">
+        <div class="ui toggle checkbox">
+          <%= f.check_box(:leaver, :type => "checkbox")  %>
+          <%= f.label :leaver %>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <div class="ui divider"></div>
+    <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
+     @user, :class => "ui small labeled icon button" %>
+    <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
+        <i class="save icon"></i> Save changes
+    <% end %>
+    <% if current_user == @user.owner %>
+      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
+          @user, 
+          method: :delete,
+          data: { confirm: "Are you sure?" },
+          class: "ui small red labeled icon button right" 
+          %>
+    <% end %>
+  </div>
+<% end %>
+

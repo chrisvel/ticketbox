@@ -1,0 +1,26 @@
+<% provide(:title, 'Users') %>
+
+<div class="row">
+  <div class="four wide column">
+    <%= render 'layouts/sidebar' %>
+  </div>
+  <div class="twelve wide column">
+    <% if logged_in? %>
+      <%= form_tag users_path, :method => 'get', :class => "ui small form",
+         :id => "user_search" do %>
+        <div class="ui icon input">
+          <%= text_field_tag :search, params[:search],
+          placeholder: "Search user by Last name or Username", 
+          type: "text" %>
+          <%# button_tag(type: 'submit', class: "ui button") do %>
+             <i class="search icon"></i>
+          <%# end %>
+          
+        </div>
+      <% end %>
+    <% end %>
+    <div id="users" class="segment-dist">
+      <%= render 'users_list' %>
+    </div>
+  </div>
+</div>
