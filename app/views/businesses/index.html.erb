@@ -1,5 +1,5 @@
 <% provide(:title, 'Businesses') %>
-<% if logged_in? %>
+<% if user_signed_in? %>
   <div class="row">
     <div class="four wide column">
       <%= render 'layouts/sidebar' %>

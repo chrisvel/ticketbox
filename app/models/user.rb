@@ -38,13 +38,13 @@ class User < ActiveRecord::Base
   #  "#{self.user.lastname}, #{self.user.firstname}"
   #end
     
-  #def self.search(search)
-  #  if search
-  #    where('username LIKE ? OR lastname LIKE ?', "%#{search}%", "%#{search}%")
-  #  else
-  #    all
-  #  end
-  #end
+  def self.search(search)
+    if search
+      where('username LIKE ? OR lastname LIKE ?', "%#{search}%", "%#{search}%")
+    else
+      all
+    end
+  end
     
   def defaults
     self.leaver ||= 0

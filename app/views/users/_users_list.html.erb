@@ -26,7 +26,7 @@
         <td><%= user.email %></td>
         <td><%= user.business.name if user.business %></td>
         <td><%= status_tag(!user.leaver) %></td>
-        <td><%= user.owner.lastname if user.owner %></td>
+        <td><%= user.lastname if user %></td>
       </tr>
     <% end %>
   </tbody>

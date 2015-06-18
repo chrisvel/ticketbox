@@ -4,42 +4,25 @@ class TicketCategoriesController < ApplicationController
   # GET /ticketcategories
   # GET /ticketcategories.json
   def index
-    if logged_in?
-      @owner = current_user
-      @ticket_categories_all = current_user.ticket_categories.paginate(page: params[:page]).order('name ASC')
+    @owner = current_user
+    @ticket_categories_all = current_user.ticket_categories.paginate(page: params[:page]).order('name ASC')
 
-      respond_to do |format|
-        format.html { render @ticket_categories }
-        format.json { render json: @ticket_categories }
-      end
-  
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
+    respond_to do |format|
+      format.html { render @ticket_categories }
+      format.json { render json: @ticket_categories }
     end
   end
 
   # GET /ticketcategories/1
   # GET /ticketcategories/1.json
   def show
-    if logged_in?
-      @ticket_category = current_user.ticket_categories.find(params[:id])
-    
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @ticket_category = current_user.ticket_categories.find(params[:id])
   end
 
   # GET /ticketcategories/new
   def new
-    if logged_in?
-      @owner = current_user
-      @ticket_category = TicketCategory.new
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @ticket_category = TicketCategory.new
   end
   
   # POST /ticketcategories
@@ -57,13 +40,8 @@ class TicketCategoriesController < ApplicationController
 
   # GET /ticketcategories/1/edit
   def edit
-    if logged_in?
-      @owner = current_user
-      @ticket_category = current_user.ticket_categories.find(params[:id])
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @ticket_category = current_user.ticket_categories.find(params[:id])
   end
 
   # PATCH/PUT /ticketcategories/1

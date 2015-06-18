@@ -4,42 +4,25 @@ class AssetLocationsController < ApplicationController
   # GET /asset_locations
   # GET /asset_locations.json
   def index
-    if logged_in?
-      @owner = current_user
-      @asset_locations_all = current_user.asset_locations.paginate(page: params[:page]).order('name ASC')
+    @owner = current_user
+    @asset_locations_all = current_user.asset_locations.paginate(page: params[:page]).order('name ASC')
 
-      respond_to do |format|
-        format.html { render @asset_locations }
-        format.json { render json: @asset_locations }
-      end
-  
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
+    respond_to do |format|
+      format.html { render @asset_locations }
+      format.json { render json: @asset_locations }
     end
   end
 
   # GET /asset_locations/1
   # GET /asset_locations/1.json
   def show
-    if logged_in?
-      @asset_location = current_user.asset_locations.find(params[:id])
-    
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @asset_location = current_user.asset_locations.find(params[:id])
   end
 
   # GET /ticketcategories/new
   def new
-    if logged_in?
-      @owner = current_user
-      @asset_location = AssetLocation.new
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @asset_location = AssetLocation.new
   end
   
   # POST /ticketcategories
@@ -57,13 +40,8 @@ class AssetLocationsController < ApplicationController
 
   # GET /ticketcategories/1/edit
   def edit
-    if logged_in?
-      @owner = current_user
-      @asset_location = current_user.asset_locations.find(params[:id])
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @asset_location = current_user.asset_locations.find(params[:id])
   end
 
   # PATCH/PUT /ticketcategories/1

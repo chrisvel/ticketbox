@@ -4,55 +4,32 @@ class BusinessesController < ApplicationController
   # GET /businesses
   # GET /businesses.json
   def index
-    if logged_in?
-      @businesses_all = current_user.businesses.paginate(page: params[:page]).order('name ASC')
+    @businesses_all = current_user.businesses.paginate(page: params[:page]).order('name ASC')
 
-      respond_to do |format|
-        format.html { render @businesses }
-        format.json { render json: @businesses }
-      end
-    
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
+    respond_to do |format|
+      format.html { render @businesses }
+      format.json { render json: @businesses }
     end
-    
   end
 
   # GET /businesses/1
   # GET /businesses/1.json
   def show
-    if logged_in?
-      @business = current_user.businesses.find(params[:id])
-      
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @business = current_user.businesses.find(params[:id])
   end
 
   # GET /businesses/new
   def new
-    if logged_in?
-      @owner = current_user
-      @business = Business.new
-      @user = User.new
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @business = Business.new
+    @user = User.new
   end
 
   # GET /businesses/1/edit
   def edit
-    if logged_in?
-      @owner = current_user
-      @business = current_user.businesses.find(params[:id])
-      @user = User.new
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @business = current_user.businesses.find(params[:id])
+    @user = User.new
   end
 
   # POST /businesses

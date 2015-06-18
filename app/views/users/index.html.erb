@@ -5,7 +5,7 @@
     <%= render 'layouts/sidebar' %>
   </div>
   <div class="twelve wide column">
-    <% if logged_in? %>
+    <% if user_signed_in? %>
       <%= form_tag users_path, :method => 'get', :class => "ui small form",
          :id => "user_search" do %>
         <div class="ui icon input">

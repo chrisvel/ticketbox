@@ -8,51 +8,39 @@ class UsersController < ApplicationController
   # GET /users.json
 
   def index
-    if user_signed_in?
-      @users_all = current_user.users.search(params[:search])
-        .paginate(page: params[:page])
-        .order('lastname ASC')
-      if current_user.owner.business
-        @businesses = current_user.owner.business.name
-      end
+    @users_all = current_user.users.search(params[:search])
+      .paginate(page: params[:page])
+      .order('lastname ASC')
+    if current_user.business
+      @businesses = current_user.business.name
+    end
 
-      respond_to do |format|
-        format.html { render @users }
-        format.json { render json: @tickets_unsolved }
-        format.js
-      end
-
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
+    respond_to do |format|
+      format.html { render @users }
+      format.json { render json: @tickets_unsolved }
+      format.js
     end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    if user_signed_in?
-      @users_all = current_user.users.order('lastname ASC')
-      if current_user.owner.business
-        @business = current_user.owner.business.name
-      end
-      @user = current_user.users.find(params[:id])
-      @user_tickets = Ticket.where(:user => @user).order('date_opened DESC')
-        .paginate(page: params[:page])
-      @user_assets = Asset.where(:user => @user).order('serial ASC')
-        .paginate(page: params[:page])
-
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
+    @users_all = current_user.users.order('lastname ASC')
+    if current_user.user.business
+      @business = current_user.user.business.name
     end
+    @user = current_user.users.find(params[:id])
+    @user_tickets = Ticket.where(:user => @user).order('date_opened DESC')
+      .paginate(page: params[:page])
+    @user_assets = Asset.where(:user => @user).order('serial ASC')
+      .paginate(page: params[:page])
   end
 
   # GET /users/new
   def new
     @owner = current_user
-    @businesses = current_user.owner.businesses
-    @groups = current_user.owner.groups
+    @businesses = current_user.user.businesses
+    @groups = current_user.user.groups
     @user = User.new
   end
 
@@ -60,7 +48,7 @@ class UsersController < ApplicationController
   def create
     if current_user
       @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
-      @groups = current_user.owner.groups
+      @groups = current_user.user.groups
       @user = current_user.users.create(user_params)
       if @user.persisted?
         flash[:green] = "User created!"
@@ -82,22 +70,17 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if user_signed_in?
-      @users_all = current_user.users.paginate(page: params[:page]).order('lastname ASC')
-      @owner = current_user
-      @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
-      @groups = current_user.owner.groups
-      @user = current_user.users.find(params[:id])
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @users_all = current_user.users.paginate(page: params[:page]).order('lastname ASC')
+    @owner = current_user
+    @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
+    @groups = current_user.user.groups
+    @user = current_user.users.find(params[:id])
   end
 
   # PATCH/PUT /users/1
   def update
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
-    @groups = current_user.owner.groups
+    @groups = current_user.user.groups
     @user = current_user.users.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:green] = "User was successfully updated."

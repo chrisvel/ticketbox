@@ -4,49 +4,31 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    if logged_in?
-      @groups_all = current_user.groups.paginate(page: params[:page]).order('name ASC')
-    
-      @owner = current_user
-      @users = User.where("owner_id = ?", current_user).order('lastname ASC')
-    
-      respond_to do |format|
-        format.html { render @groups }
-        format.json { render json: @groups }
-      end
-    
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
+    @groups_all = current_user.groups.paginate(page: params[:page]).order('name ASC')
+
+    @owner = current_user
+    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
+
+    respond_to do |format|
+      format.html { render @groups }
+      format.json { render json: @groups }
     end
-    
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
-    if logged_in?
-      @owner = current_user
-      @users = User.where("owner_id = ?", current_user).order('name ASC')
-      @group_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-      @group = current_user.groups.find(params[:id])
-      
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @users = User.where("owner_id = ?", current_user).order('name ASC')
+    @group_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
+    @group = current_user.groups.find(params[:id])
   end
 
   # GET /groups/new
   def new
-    if logged_in?
-      @owner = current_user
-      @users = User.where("owner_id = ?", current_user).order('lastname ASC')
-      @group = Group.new
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
+    @group = Group.new
   end
   
   # POST /groups
@@ -65,15 +47,10 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
-    if logged_in?
-      @groups_all = current_user.groups.order('serial ASC')
-      
-      @users = User.where("owner_id = ?", current_user).order('lastname ASC')
-      @group = Group.where("owner_id = ?", current_user).find(params[:id])
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @groups_all = current_user.groups.order('serial ASC')
+
+    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
+    @group = Group.where("owner_id = ?", current_user).find(params[:id])
   end
 
   # PATCH/PUT /groups/1

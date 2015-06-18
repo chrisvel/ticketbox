@@ -7,71 +7,48 @@ class AssetsController < ApplicationController
   # GET /assets
   # GET /assets.json
   def index
-    if logged_in?
-      @assets_all = current_user.assets
-      .search(params[:search])
-      .paginate(page: params[:page]).order('serial ASC')
-    
-      @owner = current_user
-      @users = User.where("owner_id = ?", current_user).order('lastname ASC')
-      @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-    
-      respond_to do |format|
-        format.html { render @assets }
-        format.json { render json: @assets }
-        format.js
-      end
-    
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
+    @assets_all = current_user.assets
+    .search(params[:search])
+    .paginate(page: params[:page]).order('serial ASC')
+
+    @owner = current_user
+    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
+    @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
+
+    respond_to do |format|
+      format.html { render @assets }
+      format.json { render json: @assets }
+      format.js
     end
-    
   end
 
   # GET /assets/1
   # GET /assets/1.json
   def show
-    if logged_in?
-      @owner = current_user
-      @users = User.where("owner_id = ?", current_user).order('name ASC')
-      @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-      @asset = current_user.assets.find(params[:id])
-      
-      @user_fullname  = "#{@asset.user.lastname}, #{@asset.user.firstname}"
-      @owner_fullname = "#{@asset.owner.lastname}, #{@asset.owner.firstname}"
-      
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @users = User.where("owner_id = ?", current_user).order('name ASC')
+    @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
+    @asset = current_user.assets.find(params[:id])
+
+    @user_fullname  = "#{@asset.user.lastname}, #{@asset.user.firstname}"
+    @owner_fullname = "#{@asset.owner.lastname}, #{@asset.owner.firstname}"
   end
 
   # GET /assets/new
   def new
-    if logged_in?
-      @owner = current_user
-      @users = User.where("owner_id = ?", current_user).order('lastname ASC')
-      @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-      @asset = Asset.new
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @owner = current_user
+    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
+    @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
+    @asset = Asset.new
   end
 
   # GET /assets/1/edit
   def edit
-    if logged_in?
-      @assets_all = current_user.assets.order('serial ASC')
-      
-      @users = User.where("owner_id = ?", current_user).order('lastname ASC')
-      @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-      @asset = Asset.where("owner_id = ?", current_user).find(params[:id])
-    else
-      flash[:red] = "Please sign in."
-      redirect_to login_url
-    end
+    @assets_all = current_user.assets.order('serial ASC')
+
+    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
+    @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
+    @asset = Asset.where("owner_id = ?", current_user).find(params[:id])
   end
 
   # POST /assets
