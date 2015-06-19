@@ -72,16 +72,14 @@
             { :class => 'ui search dropdown' } 
             %>
         </div>
-        <% if logged_in? %>
-          <div class="field">
-            <%= f.label :group %>
-            <%= f.select(:group_id, 
-              @groups.map{|s|[s.name, s.id]}, 
-              {}, 
-              { :class => "ui search dropdown" }
-              ) %>
-          </div>
-        <% end %>
+        <div class="field">
+          <%= f.label :group %>
+          <%= f.select(:group_id, 
+            @groups.map{|s|[s.name, s.id]}, 
+            {}, 
+            { :class => "ui search dropdown" }
+            ) %>
+        </div>
       </div>
       <div class="two fields">
           <div class="field">
@@ -102,16 +100,14 @@
           <%= f.label :position %>
           <%= f.text_field :position, :placeholder => "Enter position" %>
         </div>
-        <% if logged_in? %>
-          <div class="field">
-            <%= f.label :business %>
-            <%= f.select(:business_id, 
-              @businesses.map{|s|[s.name, s.id]}, 
-              {}, 
-              { :class => "ui search dropdown" }
-              ) %>
-          </div>
-        <% end %>
+        <div class="field">
+          <%= f.label :business %>
+          <%= f.select(:business_id, 
+            @businesses.map{|s|[s.name, s.id]}, 
+            {}, 
+            { :class => "ui search dropdown" }
+            ) %>
+        </div>
       </div>
       <div class="inline field">
         <div class="ui toggle checkbox">
@@ -127,14 +123,12 @@
     <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
         <i class="save icon"></i> Save changes
     <% end %>
-    <% if current_user == @user.owner %>
-      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
-          @user, 
-          method: :delete,
-          data: { confirm: "Are you sure?" },
-          class: "ui small red labeled icon button right" 
-          %>
-    <% end %>
+    <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
+        @user, 
+        method: :delete,
+        data: { confirm: "Are you sure?" },
+        class: "ui small red labeled icon button right" 
+        %>
   </div>
 <% end %>
 

@@ -1,15 +1,18 @@
 <div class="ui vertical fluid small menu sidebar-menu">
-    <div class="header item">
-	   <div class="">
-	       Signed in as
-		   <% if user_signed_in? %>  
-		       <%= @current_user ? 
-		  	   "#{@current_user.lastname}, #{@current_user.firstname}" :
-		  	   "Guest" 
-			   %>
-		   <% end %>
-	   </div>
+  <div class="header item">
+    <div class="">
+       Signed in as
+       <% if user_signed_in? %>  
+         <% if !@current_user.lastname.nil? && !@current_user.lastname.nil? %>
+           <%= "#{@current_user.lastname}, #{@current_user.firstname}" %>
+         <% elsif !@current_user.username.nil? %>
+           <%= "#{@current_user.username}" %>
+         <% else %>
+             Guest
+         <% end %>
+       <% end %>
     </div>
+  </div>
   <%= link_to "Dashboard", 
      dashboard_path, 
      :class => params[:controller] == 'dashboard' ? 'active teal item' : 'item'

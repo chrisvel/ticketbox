@@ -61,8 +61,8 @@
     </div>
     <div class="two fields">
       <div class="field">
-        <%= f.label :user_id %>
-        <%= f.select(:user_id, 
+        <%= f.label :owner_id %>
+        <%= f.select(:owner_id, 
           @users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
           {}, 
           :class => "ui fluid search dropdown"
@@ -70,9 +70,7 @@
       </div>
       <div class="field">
         <%= f.label :owner_id %>
-        <input placeholder="<%= @asset.owner.blank? ? 
-          current_user.lastname+','+current_user.firstname : 
-          @asset.owner.lastname+','+@asset.owner.firstname %>"
+        <input placeholder="<%= current_user.lastname+','+current_user.firstname %>"
           readonly="readonly" type="text" >
       </div>
     </div>

@@ -37,7 +37,7 @@ class AssetsController < ApplicationController
   # GET /assets/new
   def new
     @owner = current_user
-    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
+    @users = current_user.users.order('lastname ASC')
     @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
     @asset = Asset.new
   end

@@ -10,11 +10,11 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @ticket_category.owner.blank? ? 
+        <%= @ticket_category.user.blank? ? 
               image_tag("no-image.png", alt: "noimage") :
-                @ticket_category.owner.avatar.blank? ? 
+                @ticket_category.user.avatar.blank? ? 
                 image_tag("no-image.png", alt: "noimage") :
-                image_tag(@ticket_category.owner.avatar.url(:medium))
+                image_tag(@ticket_category.user.avatar.url(:medium))
                 %>
       </div>
       <div class="middle aligned content">

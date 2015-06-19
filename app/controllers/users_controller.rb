@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   # GET /users.json
 
   def index
-    @users_all = current_user.users.search(params[:search])
+    @users_all = current_user.search(params[:search])
       .paginate(page: params[:page])
       .order('lastname ASC')
     if current_user.business
@@ -26,10 +26,10 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @users_all = current_user.users.order('lastname ASC')
-    if current_user.user.business
-      @business = current_user.user.business.name
+    if current_user.business
+      @business = current_user.business.name
     end
-    @user = current_user.users.find(params[:id])
+    @user = current_user
     @user_tickets = Ticket.where(:user => @user).order('date_opened DESC')
       .paginate(page: params[:page])
     @user_assets = Asset.where(:user => @user).order('serial ASC')
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @owner = current_user
-    @businesses = current_user.user.businesses
-    @groups = current_user.user.groups
+    @businesses = current_user.businesses
+    @groups = current_user.groups
     @user = User.new
   end
 
@@ -48,8 +48,8 @@ class UsersController < ApplicationController
   def create
     if current_user
       @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
-      @groups = current_user.user.groups
-      @user = current_user.users.create(user_params)
+      @groups = current_user.groups
+      @user = current_user.create(user_params)
       if @user.persisted?
         flash[:green] = "User created!"
         redirect_to users_path
@@ -70,18 +70,18 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @users_all = current_user.users.paginate(page: params[:page]).order('lastname ASC')
+    @users_all = current_user.users
     @owner = current_user
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
-    @groups = current_user.user.groups
-    @user = current_user.users.find(params[:id])
+    @groups = current_user.groups
+    @user = current_user
   end
 
   # PATCH/PUT /users/1
   def update
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
-    @groups = current_user.user.groups
-    @user = current_user.users.find(params[:id])
+    @groups = current_user.groups
+    @user = current_user
     if @user.update_attributes(user_params)
       flash[:green] = "User was successfully updated."
       redirect_to @user
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
   private
 
     def owner_delete
-      redirect_to(root_url) unless current_user.id == @user.owner.id
+      redirect_to(root_url) unless current_user.id == @user.id
     end
 
     def user_params
@@ -127,11 +127,6 @@ class UsersController < ApplicationController
         :avatar,
         :group_id
         )
-    end
-
-    def correct_user
-      @user = current_user.users.find_by(id: params[:id])
-      redirect_to root_url if @user.nil?
     end
 
 end

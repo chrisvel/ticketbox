@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618134338) do
+ActiveRecord::Schema.define(version: 20150618173144) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -134,11 +134,19 @@ ActiveRecord::Schema.define(version: 20150618134338) do
     t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
     t.boolean  "leaver",                 limit: 1,   default: false, null: false
+    t.string   "time_zone",              limit: 255, default: "UTC", null: false
+    t.integer  "group_id",               limit: 4
+    t.string   "department",             limit: 255
+    t.string   "position",               limit: 255
+    t.string   "landline_phone",         limit: 255
+    t.string   "mobile_phone",           limit: 255
   end
 
   add_index "users", ["business_id"], name: "fk_rails_0ed4ddb088", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["group_id"], name: "fk_rails_cdd25752fc", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "users", "businesses"
+  add_foreign_key "users", "groups"
 end
