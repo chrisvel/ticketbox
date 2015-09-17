@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  force_ssl
+  # force_ssl
 
   before_action :authenticate_user!
 

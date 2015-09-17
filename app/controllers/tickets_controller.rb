@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   
-  force_ssl
+  # force_ssl
   
   before_action :authenticate_user!
   before_action :get_all_unsolved, 
