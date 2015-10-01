@@ -23,7 +23,7 @@
           <div class="field">
             <%= f.label :user_id %>
             <%= f.select(:user_id, 
-              @users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
+                current_user.users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
               {}, 
               :class => "ui search dropdown"
               ) %>

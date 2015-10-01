@@ -12,25 +12,33 @@
     </tr>
   </thead>
   <tbody>
-    <% current_user.tickets.all_unsolved.limit(6).each do |ticket| %>
+    <% if !current_user.tickets.all_unsolved.empty? %>
+      <% current_user.tickets.all_unsolved.limit(6).each do |ticket| %>
+        <tr class="">
+          <td class="text-center"><%= check_ticket_priority(ticket.severity) %></td>
+          <td>
+            <%= link_to ticket.issue, ticket, { :class => 'table_link'} %>
+          <td class="text-left collapsing"><%= check_ticket_status(ticket.status) %></td>
+          <td class="text-left collapsing">
+              <%= ticket.ticket_category.name if ticket.ticket_category %> 
+          </td>
+          <td class="text-center">
+            <%= ticket.user.avatar.blank? ? 
+              image_tag("no-image.png", alt: "noimage", class: "ui avatar image avatar-popup") :
+              image_tag(ticket.user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image avatar-popup") 
+              %>
+            <div class="ui popup">
+              <%= "#{ticket.user.lastname}, #{ticket.user.firstname}" %>
+            </div>
+          </td>
+          <td class="text-center collapsing"><%= time_ago_in_words(ticket.date_opened) %></td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr class="">
-        <td class="text-center"><%= check_ticket_priority(ticket.severity) %></td>
-        <td>
-          <%= link_to ticket.issue, ticket, { :class => 'table_link'} %>
-        <td class="text-left collapsing"><%= check_ticket_status(ticket.status) %></td>
-        <td class="text-left collapsing">
-            <%= ticket.ticket_category.name if ticket.ticket_category %> 
-        </td>
-        <td class="text-center">
-          <%= ticket.user.avatar.blank? ? 
-            image_tag("no-image.png", alt: "noimage", class: "ui avatar image avatar-popup") :
-            image_tag(ticket.user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image avatar-popup") 
-            %>
-          <div class="ui popup">
-            <%= "#{ticket.user.lastname}, #{ticket.user.firstname}" %>
-          </div>
-        </td>
-        <td class="text-center collapsing"><%= time_ago_in_words(ticket.date_opened) %></td>
+          <td colspan="6" class="text-center">
+            <br /><br /><br />Sorry, no tickets yet !
+          </td>
       </tr>
     <% end %>
   </tbody>
