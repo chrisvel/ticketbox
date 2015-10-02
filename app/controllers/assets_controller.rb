@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
-  
-  force_ssl
-  
+
+  # force_ssl
+
   before_action :authenticate_user!
 
   # GET /assets
@@ -93,15 +93,15 @@ class AssetsController < ApplicationController
 
     def asset_params
       params.require(:asset).permit(
-        :serial, 
-        :brand, 
-        :kind, 
-        :date_acquired, 
-        :user_id, 
-        :comment, 
-        :ware, 
-        :asset_location_id, 
-        :recycled, 
+        :serial,
+        :brand,
+        :kind,
+        :date_acquired,
+        :user_id,
+        :comment,
+        :ware,
+        :asset_location_id,
+        :recycled,
         :owner_id
       )
     end

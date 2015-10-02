@@ -7,7 +7,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  host: 192.168.56.4
+  host: localhost
   port: 3306
 
 development:

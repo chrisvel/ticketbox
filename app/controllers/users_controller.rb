@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  force_ssl
+  # force_ssl
 
   before_action :authenticate_user!
 
@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   # GET /users.json
 
   def index
-    @users_all = current_user.search(params[:search])
+
+    @users_all = current_user.users.search(params[:search])
       .paginate(page: params[:page])
       .order('lastname ASC')
     if current_user.business

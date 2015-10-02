@@ -1,14 +1,14 @@
 class TicketsController < ApplicationController
-  
-  force_ssl
-  
+
+  # force_ssl
+
   before_action :authenticate_user!
-  before_action :get_all_unsolved, 
+  before_action :get_all_unsolved,
                 :get_all_solved,
                 :get_all_tickets,
                 :get_all_aborted,
                 only: [:index, :show, :edit]
-  before_action :get_all_ticket_categories, 
+  before_action :get_all_ticket_categories,
                 :get_users,
                 only: [:index, :show, :edit, :new, :create, :update]
 
@@ -34,7 +34,7 @@ class TicketsController < ApplicationController
   def new
     @ticket = Ticket.new
   end
-  
+
   def create
     @ticket = current_user.tickets.create(ticket_params)
     if @ticket.persisted?
@@ -61,16 +61,16 @@ class TicketsController < ApplicationController
     flash[:green] = "Ticket deleted."
     redirect_to tickets_url
   end
-  
+
   private
-  
+
     def get_all_tickets
       @all_mixed = current_user
         .tickets
         .paginate(page: params[:page])
         .order('date_opened DESC')
     end
-  
+
     def get_all_unsolved
       @all_unsolved = current_user
         .tickets
@@ -81,43 +81,43 @@ class TicketsController < ApplicationController
                'severity = "normal" DESC',
                'severity = "low" DESC',
                'date_opened ASC')
-    end 
-    
+    end
+
     def get_all_aborted
       @tickets_aborted = current_user.tickets.where("status = ?", 'AB')
         .order('date_opened DESC')
     end
-    
+
     def get_all_solved
       @tickets_solved = current_user.tickets.where("status = ?", 'CL')
         .order('date_opened DESC')
     end
-    
+
     def get_all_in_progress
       @tickets_solved = current_user.tickets.where("status = ?", 'IP')
         .order('date_opened DESC')
     end
-    
+
     def get_all_ticket_categories
       @ticket_categories = current_user.ticket_categories.order("name ASC")
     end
-    
+
     def get_users
       #@users = User.where("owner_id = ?", current_user).order('lastname ASC')
       @users = current_user.users.order('lastname ASC')
     end
-    
+
     def ticket_params
       params.require(:ticket).permit(
-        :ticket_category_id, 
-        :issue, 
-        :user_id, 
-        :date_opened, 
-        :date_closed, 
-        :explanation, 
-        :status, 
-        :severity, 
-        :remedy, 
+        :ticket_category_id,
+        :issue,
+        :user_id,
+        :date_opened,
+        :date_closed,
+        :explanation,
+        :status,
+        :severity,
+        :remedy,
         :owner_id
       )
     end

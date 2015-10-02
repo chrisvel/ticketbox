@@ -10,7 +10,7 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @business.owner.blank? ? 
+        <%= @business.owner.blank? ?
               image_tag("no-image.png", alt: "noimage") :
                 @business.owner.avatar.blank? ? 
                 image_tag("no-image.png", alt: "noimage") :
@@ -33,8 +33,8 @@
   <div class="asset-data">
     <div class="field ui input fluid">
       <%= f.label :name %>
-      <%= f.text_field :name, 
-        :class => "", 
+      <%= f.text_field :name,
+        :class => "",
         :placeholder => "Enter business name.." %>
     </div>
     <div class="field">
@@ -49,10 +49,10 @@
       <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
           <i class="save icon"></i> Save changes
       <% end %>
-      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(), 
-        @business, 
-        method: :delete, 
-        data: { confirm: 'Are you sure?' }, 
+      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
+        @business,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
         :class =>"ui red small icon labeled button" if @business.id %>
     </div>
   </div>
