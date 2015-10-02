@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+<<<<<<< HEAD
 
   # force_ssl
 

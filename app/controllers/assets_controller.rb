@@ -1,4 +1,5 @@
 class AssetsController < ApplicationController
+<<<<<<< HEAD
 
   # force_ssl
 
