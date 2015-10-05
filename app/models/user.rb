@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+
   # own stuff
   include PublicActivity::Model
   tracked
   #tracked owner: Proc.new{ |controller, model| controller.current_user }
-    
+
   # Relationships
   has_many :assets, :foreign_key => "owner_id"
   has_many :users, :foreign_key => "id"
@@ -21,23 +21,33 @@ class User < ActiveRecord::Base
   belongs_to :group, :foreign_key => "group_id"
   belongs_to :business, :foreign_key => "business_id"
   has_one :membership
-  
+
+  # Validations
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  validates :firstname, length: { maximum: 20 }
+  validates :lastname, length: { maximum: 20 }
+  validates :email, presence: true, length: { maximum: 250 },
+                    format: { with: EMAIL_REGEX },
+                    uniqueness: true
+  validates :password, length: { minimum: 8 }
+
   # Images
-  has_attached_file :avatar, :styles => { 
-    :medium => "300x300#", 
+  has_attached_file :avatar, :styles => {
+    :medium => "300x300#",
     :thumb => "100x100#",
-  }, 
+  },
     :default_url => "/images/no-image.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-  
+
   #def get_user_fullname
   #  "#{self.lastname}, #{self.firstname}"
   #end
-  
+
   #def get_user_fullname
   #  "#{self.user.lastname}, #{self.user.firstname}"
   #end
-    
+
   def self.search(search)
     if search
       where('username LIKE ? OR lastname LIKE ?', "%#{search}%", "%#{search}%")
@@ -45,13 +55,13 @@ class User < ActiveRecord::Base
       all
     end
   end
-    
+
   def defaults
     self.leaver ||= 0
   end
 
   private
-  
+
     #
-  
+
 end

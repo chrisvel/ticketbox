@@ -5,38 +5,38 @@ describe User do
 
   let(:user){ FactoryGirl.create :user }
 
+  #it { should respond_to(:email) }
+
   context 'is valid' do
 
     it 'with a .firstname, .lastname, .email and .password' do
       expect(user).to be_valid
     end
-
     it 'without a .firstname' do
       user.firstname = ''
       expect(user).to be_valid
     end
-
     it 'without a .lastname' do
       user.lastname = ''
       expect(user).to be_valid
     end
-
     it 'without a .firstname and a .lastname' do
       user.firstname = ''
       user.lastname = ''
       expect(user).to be_valid
     end
 
-    it 'and authenticates with the right .password' do
-      expect(user.authenticate('12345678')).to be_valid
-    end
-
   end
 
   context 'is invalid' do
 
-    it 'with a long .name' do
-      user.name = 'uriu7nbvckeuruvwuevwevih2o84o2ijeqilqievubv'
+    it 'with a long .firstname' do
+      user.firstname = 'uriu7nbvckeuruvwuevwevih2o84o2ijeqilqievubv'
+      expect(user).not_to be_valid
+    end
+
+    it 'with a long .lastname' do
+      user.lastname = 'uriu7nbvckeuruvwuevwevih2o84o2ijeqilqievubv'
       expect(user).not_to be_valid
     end
 
@@ -85,10 +85,6 @@ describe User do
       user.password = '123'
       user.password_confirmation = '123'
       expect(user).not_to be_valid
-    end
-
-    it 'when authenticating with the wrong .password' do
-      expect(user.authenticate('453t3trg')).to be_falsey
     end
 
   end
