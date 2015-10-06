@@ -131,7 +131,7 @@
   <div class="ui divider"></div>
     <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
      @user, :class => "ui small labeled icon button" %>
-    <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
+    <%= f.button(type: 'submit', class: "ui small labeled blue icon button") do %>
         <i class="save icon"></i> Save changes
     <% end %>
     <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
