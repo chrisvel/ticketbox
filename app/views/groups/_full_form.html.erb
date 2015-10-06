@@ -10,11 +10,11 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @group.owner.blank? ? 
+        <%= @group.user.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @group.owner.avatar.blank? ? 
+                @group.user.avatar.blank? ?
                 image_tag("no-image.png", alt: "noimage") :
-                image_tag(@group.owner.avatar.url(:medium))
+                image_tag(@group.user.avatar.url(:medium))
                 %>
       </div>
       <div class="middle aligned content">
@@ -33,15 +33,15 @@
   <div class="asset-data">
     <div class="field ui input fluid">
       <%= f.label :name %>
-      <%= f.text_field :name, 
-        :class => "", 
+      <%= f.text_field :name,
+        :class => "",
         :placeholder => "Enter group name.." %>
     </div>
     <div class="field">
       <%= f.label :owner_id %>
-      <input placeholder="<%= @group.owner.blank? ? 
-        current_user.lastname+','+current_user.firstname : 
-        @group.owner.lastname+','+@group.owner.firstname %>"
+      <input placeholder="<%= @group.user.blank? ?
+        current_user.lastname+','+current_user.firstname :
+        @group.user.lastname+','+@group.user.firstname %>"
         readonly="readonly" type="text" >
     </div>
     <div class="ui divider"></div>
@@ -51,10 +51,10 @@
       <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
           <i class="save icon"></i> Save changes
       <% end %>
-      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(), 
-        @group, 
-        method: :delete, 
-        data: { confirm: 'Are you sure?' }, 
+      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
+        @group,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
         :class =>"ui red small icon labeled button" if @group.id %>
     </div>
   </div>

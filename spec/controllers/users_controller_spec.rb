@@ -28,20 +28,30 @@ describe UsersController do
         get :show, id: @user
         expect(response).to render_template :show
       end
-      it "assigns the requested contact to @user" do
+      it "assigns the requested user to @user" do
         get :show, id: @user
         expect(assigns(:user)).to eq @user
       end
     end
 
-    describe 'POST #new' do
+    describe 'POST #create' do
       context 'with valid attributes' do
-        it 'saves a new user in the database' do
-          User.create!(FactoryGirl.attributes_for(:peter))
-          expect(response).to be_success
-          #expect{
-          #  post :new, user: FactoryGirl.attributes_for(:peter)
-          #}.to change(User, :count).by(1)
+        it 'creates a new user in the database' do
+          expect{
+            post :create, user: FactoryGirl.attributes_for(:peter)
+          }.to change(User, :count).by(1)
+        end
+      end
+      context 'with invalid attributes' do
+        it 'fails to create a new user in the database' do
+          expect{
+            invalid_user = {
+              username: "......88DD",
+              email: "test",
+              password: "11"
+            }
+            post :create, user: invalid_user
+          }.not_to change(User, :count)
         end
       end
     end
