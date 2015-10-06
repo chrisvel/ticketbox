@@ -47,26 +47,26 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    if current_user
+    #if current_user
       @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
       @groups = current_user.groups
-      @user = current_user.create(user_params)
+      @user = current_user.user.create(user_params)
       if @user.persisted?
         flash[:green] = "User created!"
         redirect_to users_path
       else
-        redirect_to root_path
+        redirect_to users_path
       end
-    else
-      @user = User.new(user_params)
-      if @user.save
-        @user.send_activation_email
-        flash[:blue] = "Please check your email to activate your account."
-        redirect_to root_path
-      else
-        render :signup
-      end
-    end
+    #else
+  #    @user = User.new(user_params)
+  #    if @user.save
+  #      @user.send_activation_email
+  #      flash[:blue] = "Please check your email to activate your account."
+  #      redirect_to root_path
+  #    else
+  #      render :signup
+  #    end
+  #  end
   end
 
   # GET /users/1/edit

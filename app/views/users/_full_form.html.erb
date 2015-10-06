@@ -11,9 +11,9 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @user.blank? ? 
+        <%= @user.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @user.avatar.blank? ? 
+                @user.avatar.blank? ?
                 image_tag("no-image.png", alt: "noimage") :
                 image_tag(@user.avatar.url(:medium))
                 %>
@@ -30,12 +30,12 @@
   </div>
   <div class="ui divider"></div>
   <%= render 'shared/error_messages', :target => @user %>
-  <div class="ticket-data" id="ticket-full-data"> 
+  <div class="ticket-data" id="ticket-full-data">
     <div class="field">
       <%= f.label :avatar %>
-      <%= @user.avatar.blank? ? 
+      <%= @user.avatar.blank? ?
         image_tag("no-image.png", alt: "noimage", class: "ui small rounded image") :
-        image_tag(@user.avatar.url(:thumb), alt: "user-image", class: "ui small rounded image") 
+        image_tag(@user.avatar.url(:thumb), alt: "user-image", class: "ui small rounded image")
         %>
       <br />
       <%= f.file_field :avatar %>
@@ -51,32 +51,43 @@
         <%= f.text_field :email, :placeholder => "Enter email" %>
       </div>
     </div>
+		<div class="two fields">
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.text_field :username, :placeholder => "Enter password",
+        :type => "text" %>
+      </div>
+      <div class="required field">
+        <%= f.label :password_confirmation %>
+        <%= f.text_field :email, :placeholder => "Confirm password" %>
+      </div>
+    </div>
     <div class="field">
       <%= f.label "Full name" %>
       <div class="two fields">
         <div class="field">
-          <%= f.text_field :firstname, :placeholder => "Enter first name", 
+          <%= f.text_field :firstname, :placeholder => "Enter first name",
           :type => "text" %>
         </div>
         <div class="field">
-          <%= f.text_field :lastname, :placeholder => "Enter last name", 
+          <%= f.text_field :lastname, :placeholder => "Enter last name",
           :type => "text" %>
         </div>
       </div>
       <div class="two fields">
         <div class="field">
           <%= f.label :time_zone %>
-          <%= f.time_zone_select :time_zone, 
-            nil, 
-            {}, 
-            { :class => 'ui search dropdown' } 
+          <%= f.time_zone_select :time_zone,
+            nil,
+            {},
+            { :class => 'ui search dropdown' }
             %>
         </div>
         <div class="field">
           <%= f.label :group %>
-          <%= f.select(:group_id, 
-            @groups.map{|s|[s.name, s.id]}, 
-            {}, 
+          <%= f.select(:group_id,
+            @groups.map{|s|[s.name, s.id]},
+            {},
             { :class => "ui search dropdown" }
             ) %>
         </div>
@@ -102,9 +113,9 @@
         </div>
         <div class="field">
           <%= f.label :business %>
-          <%= f.select(:business_id, 
-            @businesses.map{|s|[s.name, s.id]}, 
-            {}, 
+          <%= f.select(:business_id,
+            @businesses.map{|s|[s.name, s.id]},
+            {},
             { :class => "ui search dropdown" }
             ) %>
         </div>
@@ -116,7 +127,7 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="ui divider"></div>
     <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
      @user, :class => "ui small labeled icon button" %>
@@ -124,11 +135,10 @@
         <i class="save icon"></i> Save changes
     <% end %>
     <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
-        @user, 
+        @user,
         method: :delete,
         data: { confirm: "Are you sure?" },
-        class: "ui small red labeled icon button right" 
+        class: "ui small red labeled icon button right"
         %>
   </div>
 <% end %>
-
