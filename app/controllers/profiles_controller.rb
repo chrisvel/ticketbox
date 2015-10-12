@@ -2,15 +2,16 @@ class ProfilesController < ApplicationController
 
   before_action :authenticate_user!
 
-  # GET /users
-  # GET /users.json
+  # GET /profiles
+  # GET /profiles.json
 
   def index
 
     # TODO current_user.users.search.....
-    @users_all = User.search(params[:search])
-      .paginate(page: params[:page])
-      .order('lastname ASC')
+    @profiles_all = current_user.profiles.search(params[:search])
+    .paginate(page: params[:page])
+    .order('lastname ASC')
+
     if current_user.business
       @businesses = current_user.business.name
     end
@@ -22,26 +23,26 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
+  # GET /profiles/1
+  # GET /profiles/1.json
   def show
-    @users_all = current_user.users.order('lastname ASC')
+    @profiles_all = current_user.profiles.order('lastname ASC')
     if current_user.business
       @business = current_user.business.name
     end
-    @user = current_user
-    @user_tickets = Ticket.where(:user => @user).order('date_opened DESC')
+    @profile = current_user.profiles.find(params[:id])
+    @profile_tickets = Ticket.where(:user => @user).order('date_opened DESC')
       .paginate(page: params[:page])
-    @user_assets = Asset.where(:user => @user).order('serial ASC')
+    @profile_assets = Asset.where(:user => @user).order('serial ASC')
       .paginate(page: params[:page])
   end
-  
+
   # GET /profiles/new
   def new
-    @owner = current_user
     @businesses = current_user.businesses
     @groups = current_user.groups
-    @user = User.new
+    @profile = User.new
+    @profile.profile_id = current_user.id
   end
 
   # POST /users
@@ -49,17 +50,18 @@ class ProfilesController < ApplicationController
     if current_user
       @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
       @groups = current_user.groups
-      @user = User.create(user_params)
-      if @user.persisted?
+      @profile = User.create(user_params)
+      @profile.profile_id = current_user.id
+      if @profile.persisted?
         flash[:green] = "User created!"
         redirect_to users_path
       else
         redirect_to root_path
       end
     else
-      @user = User.new(user_params)
-      if @user.save
-        @user.send_activation_email
+      @profile = User.new(user_params)
+      if @profile.save
+        @profile.send_activation_email
         flash[:blue] = "Please check your email to activate your account."
         redirect_to root_path
       else
@@ -68,29 +70,29 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
+  # GET /profiles/1/edit
   def edit
     @users_all = current_user.users
     @owner = current_user
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
     @groups = current_user.groups
-    @user = current_user
+    @profile = current_user.profiles.find(params[:id])
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /profiles/1
   def update
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
     @groups = current_user.groups
-    @user = current_user
-    if @user.update_attributes(user_params)
+    @profile = current_user.profiles.find(params[:id])
+    if @profile.update_attributes(user_params)
       flash[:green] = "User was successfully updated."
-      redirect_to @user
+      redirect_to @profile
     else
       render :edit
     end
   end
 
-  # DELETE /users/1
+  # DELETE /profiles/1
   def destroy
     User.find(params[:id]).destroy
     flash[:green] = "User deleted."

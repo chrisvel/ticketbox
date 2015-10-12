@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @users_all.each do |user| %>
+    <% @profiles_all.each do |user| %>
       <tr>
         <td class="text-center">
           <%= user.avatar.blank? ?
@@ -42,9 +42,9 @@
           <div class="ui two column grid">
             <div class="column">
               <div class="info-pagination">
-                <%= page_entries_info @users_all %>
+                <%= page_entries_info @profiles_all %>
               </div>
-              <%= will_paginate @users_all %>
+              <%= will_paginate @profiles_all %>
             </div>
             <div class="column right aligned">
               <%= link_to '<i class="user icon"></i> New Profile'.html_safe(),

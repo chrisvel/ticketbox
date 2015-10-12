@@ -1,54 +1,54 @@
 <div class="ui top left attached teal label">
-	<% if @user.username %>
-	  Edit user #<%= @user.username %>
+	<% if @profile.username %>
+	  Edit profile #<%= @profile.username %>
   <% else %>
-	  New user
+	  New profile
   <% end %>
 </div>
 
-<% if @user.errors.any? %>
+<% if @profile.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-error">
-      The form contains <%= pluralize(@user.errors.count, "error") %>.
+      The form contains <%= pluralize(@profile.errors.count, "error") %>.
     </div>
     <ul>
-    <% @user.errors.full_messages.each do |msg| %>
+    <% @profile.errors.full_messages.each do |msg| %>
       <li>* <%= msg %></li>
     <% end %>
     </ul>
   </div>
 <% end %>
 
-<%= form_for(@user,:url => profiles_path, :html => {:class => "ui small form", id: "myForm"}) do |f| %>
+<%= form_for(@profile, :html => {:class => "ui small form", id: "myForm"}) do |f| %>
 
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @user.blank? ?
+        <%= @profile.blank? ?
+            image_tag("no-image.png", alt: "noimage") :
+              @profile.avatar.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @user.avatar.blank? ?
-                image_tag("no-image.png", alt: "noimage") :
-                image_tag(@user.avatar.url(:medium))
-                %>
+              image_tag(@profile.avatar.url(:medium))
+              %>
       </div>
       <div class="middle aligned content">
-        <div class="header"><%= @user.blank? ? @user.username : "New user" %></div>
+        <div class="header"><%= @profile.blank? ? @profile.username : "New profile" %></div>
         <div class="meta">
           <span class="cinema">
-            <%= @user.blank? ? @user.email : "" %>
+            <%= @profile.blank? ? @profile.email : "" %>
           </span>
         </div>
       </div>
     </div>
   </div>
   <div class="ui divider"></div>
-  <%= render 'shared/error_messages', :target => @user %>
+  <%= render 'shared/error_messages', :target => @profile %>
   <div class="ticket-data" id="ticket-full-data">
     <div class="field">
       <%= f.label :avatar %>
-      <%= @user.avatar.blank? ?
+      <%= @profile.avatar.blank? ?
         image_tag("no-image.png", alt: "noimage", class: "ui small rounded image") :
-        image_tag(@user.avatar.url(:thumb), alt: "user-image", class: "ui small rounded image")
+        image_tag(@profile.avatar.url(:thumb), alt: "user-image", class: "ui small rounded image")
         %>
       <br />
       <%= f.file_field :avatar %>
@@ -132,12 +132,12 @@
   </div>
   <div class="ui divider"></div>
     <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
-     @user, :class => "ui small labeled icon button" %>
+     @profile, :class => "ui small labeled icon button" %>
     <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
         <i class="save icon"></i> Save changes
     <% end %>
     <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
-        @user,
+        @profile,
         method: :delete,
         data: { confirm: "Are you sure?" },
         class: "ui small red labeled icon button right"

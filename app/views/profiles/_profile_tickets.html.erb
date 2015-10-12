@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @user_tickets.each do |ticket| %>
+    <% @profile_tickets.each do |ticket| %>
       <tr >
         <td class="text-center"><%= check_ticket_priority(ticket.severity) %></td>
         <td class="text-center"><%= check_ticket_status(ticket.status) %></td>
@@ -18,7 +18,7 @@
           <%= link_to ticket.issue, ticket, { :class => 'table_link'} %>
           <br /><small><%= ticket.explanation %></small></td>
         <td class="text-center">
-            <%= ticket.ticket_category.name if ticket.ticket_category %> 
+            <%= ticket.ticket_category.name if ticket.ticket_category %>
         </td>
         <td class="text-center"><%= time_ago_in_words(ticket.date_opened) %></td>
         <td class="text-center"><%= time_ago_in_words(ticket.date_closed) if ticket.date_closed %></td>
@@ -28,13 +28,13 @@
   <tfoot>
     <tr>
       <th colspan="6">
-        <div class="row">  
+        <div class="row">
           <div class="ui two column grid">
             <div class="column">
               <div class="info-pagination">
-                <%= page_entries_info @user_tickets %>
+                <%= page_entries_info @profile_tickets %>
               </div>
-              <%= will_paginate @user_tickets %>
+              <%= will_paginate @profile_tickets %>
             </div>
           </div>
         </div>

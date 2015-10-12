@@ -1,5 +1,4 @@
 class AssetsController < ApplicationController
-<<<<<<< HEAD
 
   # force_ssl
 
@@ -46,7 +45,6 @@ class AssetsController < ApplicationController
   # GET /assets/1/edit
   def edit
     @assets_all = current_user.assets.order('serial ASC')
-
     @users = User.where("owner_id = ?", current_user).order('lastname ASC')
     @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
     @asset = Asset.where("owner_id = ?", current_user).find(params[:id])
