@@ -1,0 +1,46 @@
+<div class="ui grid">
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+    <tbody>
+      <tr>
+        <td class="three wide column">Username</td>
+        <td class="eleven wide column"><%= @user.username if @user.username %></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>Landline</td>
+        <td class="phone_no"><%= @user.landline_phone? ? @user.landline_phone : ""  %></td>
+      </tr>
+      <tr>
+        <td>Mobile</td>
+        <td class="phone_no"><%= @user.mobile_phone? ? @user.mobile_phone : ""  %></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="eight wide column">
+    <table class="ui small definition orange table">
+    <tbody>
+      <tr>
+        <td class="three wide column">Position</td>
+        <td class="eleven wide column"><%= @user.position? ? @user.position : ""  %></td>
+      </tr>
+      <tr>
+        <td>Department</td>
+        <td><%= @user.department? ? @user.department : ""  %></td>
+      </tr>
+      <tr>
+        <td>Business</td>
+        <td><%= @user.business.name if @user.business%></td>
+      </tr>
+      <tr>
+        <td>Time Zone</td>
+        <td><%= @user.time_zone ? @user.time_zone : "" %></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

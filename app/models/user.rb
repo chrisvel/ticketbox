@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   belongs_to :group, :foreign_key => "group_id"
   belongs_to :business, :foreign_key => "business_id"
   has_one :membership
+  has_many :profiles, class_name: "User"
+  belongs_to :user
 
   # Validations
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

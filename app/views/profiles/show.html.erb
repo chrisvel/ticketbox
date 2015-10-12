@@ -1,0 +1,90 @@
+<% provide(:title, @user.username) %>
+
+<div class="row">
+  <div class="four wide column">
+    <%= render 'layouts/sidebar' %>
+  </div>
+  <div class="twelve wide column">
+    <div class="ui segment ticket-show">
+      <div class="ui teal top left attached label">
+        User #<%= @user.username %>
+      </div>
+      
+      <%= @user.leaver? ? ('<div class="ui red top right attached label">
+        <i class="warning icon"></i>LEAVER</div><br />').html_safe() : "" %>
+      <div class="ui relaxed divided items">
+        <div class="item">
+          <div class="ui small image">
+            <%= @user.avatar.blank? ? 
+              image_tag("no-image.png", alt: "noimage", class: "ui small rounded image") :
+              image_tag(@user.avatar.url(:medium), class: "ui small rounded image") 
+              %>
+          </div>
+          <div class="content">
+            <a class="header"><%= "#{@user.lastname}, #{@user.firstname}" %></a>
+            <div class="meta">
+              <a><%= @user.email %></a>
+            </div>
+            <div class="extra">
+              <div class="ui mini horizontal statistics">
+                <div class="purple statistic">
+                  <div class="value">
+                    <%= @user_tickets.count %>
+                  </div>
+                  <div class="label">
+                    tickets opened
+                  </div>
+                </div>
+                <div class="purple statistic">
+                  <div class="value">
+                    <%= @user_assets.count %>
+                  </div>
+                  <div class="label">
+                    assets in possession
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h4 class="ui horizontal header divider">
+        <i class="book icon"></i>
+        User details
+      </h4>
+      <div class="ui grid">
+        <div class="sixteen wide column">
+          <%= render partial: 'user_details' %>
+        </div>
+      </div>
+      
+      <h4 class="ui horizontal header divider">
+        <i class="laptop icon"></i>
+        User assets
+      </h4>
+      <div class="ui grid">
+        <div class="sixteen wide column">
+          <%= render partial: 'user_assets' %>
+        </div>
+      </div>
+      
+      <h4 class="ui horizontal header divider">
+        <i class="ticket icon"></i>
+        User tickets
+      </h4>
+      <div class="ui grid">
+        <div class="sixteen wide column">
+          <%= render partial: 'user_tickets' %>
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <div class="">
+        <%= link_to '<i class="left chevron icon"></i> Back'.html_safe(), 
+          users_path, :class => "ui labeled tiny icon button" %>
+        <%= link_to '<i class="pencil icon"></i> Edit'.html_safe(),
+          edit_user_path(@user), :class => "ui labeled tiny icon teal button"%>
+      </div>
+    </div>
+  </div>
+</div>

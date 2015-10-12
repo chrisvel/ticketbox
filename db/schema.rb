@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618173144) do
+ActiveRecord::Schema.define(version: 20151012112355) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150618173144) do
     t.text    "comment",           limit: 4294967295, null: false
     t.string  "ware",              limit: 50,         null: false
     t.integer "asset_location_id", limit: 4,          null: false
-    t.boolean "recycled",          limit: 1,          null: false
+    t.boolean "recycled",                             null: false
     t.integer "owner_id",          limit: 4,          null: false
   end
 
@@ -133,13 +133,14 @@ ActiveRecord::Schema.define(version: 20150618173144) do
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
-    t.boolean  "leaver",                 limit: 1,   default: false, null: false
+    t.boolean  "leaver",                             default: false, null: false
     t.string   "time_zone",              limit: 255, default: "UTC", null: false
     t.integer  "group_id",               limit: 4
     t.string   "department",             limit: 255
     t.string   "position",               limit: 255
     t.string   "landline_phone",         limit: 255
     t.string   "mobile_phone",           limit: 255
+    t.integer  "profile_id",             limit: 4
   end
 
   add_index "users", ["business_id"], name: "fk_rails_0ed4ddb088", using: :btree
