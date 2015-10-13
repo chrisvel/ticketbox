@@ -1,8 +1,8 @@
 <div class="ui top left attached teal label">
 	<% if @profile.username %>
-	  Edit profile #<%= @profile.username %>
+	  Edit user profile #<%= @profile.username %>
   <% else %>
-	  New profile
+	  New user profile
   <% end %>
 </div>
 
@@ -19,7 +19,8 @@
   </div>
 <% end %>
 
-<%= form_for(@profile, :html => {:class => "ui small form", id: "myForm"}) do |f| %>
+<%= form_for(@profile, url: profile_url(@profile), :html => {:class => "ui small form", id: "myForm"}) do |f| %>
+	<% #binding.pry %>
 
   <div class="ui items">
     <div class="item">
@@ -137,7 +138,7 @@
         <i class="save icon"></i> Save changes
     <% end %>
     <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
-        @profile,
+        profile_url(@profile),
         method: :delete,
         data: { confirm: "Are you sure?" },
         class: "ui small red labeled icon button right"

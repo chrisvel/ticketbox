@@ -6,8 +6,6 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
 
   def index
-
-    # TODO current_user.users.search.....
     @profiles_all = current_user.profiles.search(params[:search])
     .paginate(page: params[:page])
     .order('lastname ASC')
@@ -87,26 +85,24 @@ class ProfilesController < ApplicationController
 
   # PATCH/PUT /profiles/1
   def update
-
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
     @groups = current_user.groups
-    #@profile = current_user.profiles.find(params[:id])
     @profile = current_user.profiles.find(params[:id])
-
+    @profile.password = "12341234"
+    #binding.pry
     if @profile.update_without_password(user_params)
       flash[:green] = "User was successfully updated."
-      redirect_to @profile
+      redirect_to profile_url
     else
-      binding.pry
-      render :edit
+      render :edit, @profile
     end
   end
 
   # DELETE /profiles/1
   def destroy
-    User.find(params[:id]).destroy
+    current_user.profiles.find(params[:id]).destroy
     flash[:green] = "User deleted."
-    redirect_to users_url
+    redirect_to profiles_url
   end
 
   # /signup

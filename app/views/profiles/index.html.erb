@@ -1,4 +1,4 @@
-<% provide(:title, 'Profiles') %>
+<% provide(:title, 'User Profiles') %>
 
 <div class="row">
   <div class="four wide column">
@@ -6,7 +6,7 @@
   </div>
   <div class="twelve wide column">
     <% if user_signed_in? %>
-      <%= form_tag users_path, :method => 'get', :class => "ui small form",
+      <%= form_tag profiles_path, :method => 'get', :class => "ui small form",
          :id => "user_search" do %>
         <div class="ui icon input">
           <%= text_field_tag :search, params[:search],

@@ -28,9 +28,7 @@ Rails.application.routes.draw do
   resources :assets
   resources :memberships
   resources :roles
-  resources :profiles do
-    get 'profiles/:id', to: 'profiles#update'
-  end
+  resources :profiles
 
   root 'dashboard#index'
 
