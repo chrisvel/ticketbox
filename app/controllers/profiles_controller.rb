@@ -52,13 +52,19 @@ class ProfilesController < ApplicationController
       @groups = current_user.groups
       @profile = User.create(user_params)
       @profile.profile_id = current_user.id
-      if @profile.persisted?
+
+      generated_password = Devise.friendly_token.first(8)
+      @profile.password = generated_password
+
+      if @profile.save
         flash[:green] = "User created!"
-        redirect_to users_path
+        redirect_to @profile
       else
+        #binding.pry
         redirect_to root_path
       end
     else
+
       @profile = User.new(user_params)
       if @profile.save
         @profile.send_activation_email
@@ -81,13 +87,17 @@ class ProfilesController < ApplicationController
 
   # PATCH/PUT /profiles/1
   def update
+
     @businesses = Business.where("owner_id = ?", current_user).order('name ASC')
     @groups = current_user.groups
+    #@profile = current_user.profiles.find(params[:id])
     @profile = current_user.profiles.find(params[:id])
-    if @profile.update_attributes(user_params)
+
+    if @profile.update_without_password(user_params)
       flash[:green] = "User was successfully updated."
       redirect_to @profile
     else
+      binding.pry
       render :edit
     end
   end
@@ -127,7 +137,8 @@ class ProfilesController < ApplicationController
         :landline_phone,
         :mobile_phone,
         :avatar,
-        :group_id
+        :group_id,
+        :profile_id
         )
     end
 

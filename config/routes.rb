@@ -19,8 +19,6 @@ Rails.application.routes.draw do
   get    'dashboard' => 'dashboard#index'
   get    'intro'     => 'welcome#intro'
 
-  resources :profiles
-
   resources :users
   resources :groups
   resources :ticket_categories
@@ -30,7 +28,9 @@ Rails.application.routes.draw do
   resources :assets
   resources :memberships
   resources :roles
-  resources :profiles
+  resources :profiles do
+    get 'profiles/:id', to: 'profiles#update'
+  end
 
   root 'dashboard#index'
 

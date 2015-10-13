@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
 
     # TODO current_user.users.search.....
-    @users_all = User.search(params[:search])
+    @users_all = current_user.search(params[:search])
       .paginate(page: params[:page])
       .order('lastname ASC')
     if current_user.business

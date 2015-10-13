@@ -29,6 +29,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.3.3'
   gem "brakeman"
   gem "factory_girl_rails"
+  gem 'pry-rails'
 end
 
 group :test do
