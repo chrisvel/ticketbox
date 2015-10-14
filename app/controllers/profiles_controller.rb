@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.profiles.find(params[:id])
     @profile_tickets = Ticket.where(:user => @user).order('date_opened DESC')
       .paginate(page: params[:page])
-    @profile_assets = Asset.where(:user => @user).order('serial ASC')
+    @profile_assets = Asset.where(:owner => @user).order('serial ASC')
       .paginate(page: params[:page])
   end
 

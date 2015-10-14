@@ -37,9 +37,9 @@ class AssetsController < ApplicationController
   # GET /assets/new
   def new
     @owner = current_user
-    @users = current_user.users.order('lastname ASC')
+    @users = User.where("owner_id = ?", current_user).order('lastname ASC')
     @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-    @asset = Asset.new
+    @asset = current_user.assets.new
   end
 
   # GET /assets/1/edit
@@ -47,15 +47,15 @@ class AssetsController < ApplicationController
     @assets_all = current_user.assets.order('serial ASC')
     @users = User.where("owner_id = ?", current_user).order('lastname ASC')
     @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-    @asset = Asset.where("owner_id = ?", current_user).find(params[:id])
+    @asset = current_user.assets.find(params[:id])
   end
 
   # POST /assets
   # POST /assets.json
   def create
-    @asset_locations = AssetLocation.where("owner_id = ?", current_user).order('name ASC')
-    @asset = current_user.assets.create(asset_params)
+    @asset_locations = current_user.asset_locations.order('name ASC')
     @owner = current_user
+    @asset = current_user.assets.create(asset_params)
     if @asset.persisted?
       flash[:green] = "Asset created!"
       redirect_to assets_path
@@ -81,6 +81,7 @@ class AssetsController < ApplicationController
   # DELETE /assets/1
   # DELETE /assets/1.json
   def destroy
+    @asset = current_user.assets.find(params[:id])
     @asset.destroy
     respond_to do |format|
       format.html { redirect_to assets_url, notice: 'Asset was successfully destroyed.' }

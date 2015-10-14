@@ -29,10 +29,10 @@
       <tr>
         <td>User</td>
         <td>
-          <%= link_to @asset.user, { :class => 'table_link'} do %>
-          <%= @asset.user.avatar.blank? ? 
+          <%= link_to @asset.owner, { :class => 'table_link'} do %>
+          <%= @asset.owner.avatar.blank? ?
             image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
-            image_tag(@asset.user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            image_tag(@asset.owner.avatar.url(:thumb), alt: "user-image", class: "ui avatar image")
             %>
           <%= @user_fullname %>
           <% end %>
@@ -43,7 +43,7 @@
           <%= link_to @asset.owner, { :class => 'table_link'} do %>
           <%= @asset.owner.avatar.blank? ? 
             image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
-            image_tag(@asset.owner.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            image_tag(@asset.owner.avatar.url(:thumb), alt: "user-image", class: "ui avatar image")
             %>
           <%= @owner_fullname %>
           <% end %>

@@ -10,11 +10,11 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @asset_location.user.blank? ? 
+        <%= current_user.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @asset_location.user.avatar.blank? ? 
+                current_user.avatar.blank? ?
                 image_tag("no-image.png", alt: "noimage") :
-                image_tag(@asset_location.user.avatar.url(:medium))
+                image_tag(current_user.avatar.url(:medium))
                 %>
       </div>
       <div class="middle aligned content">
@@ -34,13 +34,13 @@
   <div class="asset-data">
     <div class="field ui input fluid">
       <%= f.label :name %>
-      <%= f.text_field :name, 
-        :class => "", 
+      <%= f.text_field :name,
+        :class => "",
         :placeholder => "Enter asset location name.." %>
     </div>
     <div class="field">
       <%= f.label :owner_id %>
-      <input placeholder="<%= @asset_location.user.lastname+","+@asset_location.user.firstname %>"
+      <input placeholder="<%= current_user.lastname+","+current_user.firstname %>"
         readonly="readonly" type="text" >
     </div>
     <div class="ui divider"></div>
@@ -50,10 +50,10 @@
       <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
           <i class="save icon"></i> Save changes
       <% end %>
-      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(), 
-        @asset_location, 
-        method: :delete, 
-        data: { confirm: 'Are you sure?' }, 
+      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
+        @asset_location,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
         :class =>"ui red small icon labeled button" if @asset_location.id %>
     </div>
   </div>

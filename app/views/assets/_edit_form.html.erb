@@ -6,19 +6,19 @@
   <% end %>
 </div>
 
-<%= @asset.recycled? ? 
+<%= @asset.recycled? ?
   ('<div class="ui top right attached green label">
     <i class="trash icon"></i>RECYCLED</div>').html_safe() : "" %>
 
-<%= form_for(@asset, :html => {:class => "ui small form"}) do |f| %>
+<%= form_for(@asset, url: assetproc_url(@asset), :html => {:class => "ui small form"}) do |f| %>
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @asset.user.blank? ? 
+        <%= @asset.owner.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @asset.user.avatar.blank? ? 
+                @asset.owner.avatar.blank? ?
                 image_tag("no-image.png", alt: "noimage") :
-                image_tag(@asset.user.avatar.url(:medium))
+                image_tag(@asset.owner.avatar.url(:medium))
                 %>
       </div>
       <div class="middle aligned content">
@@ -34,7 +34,7 @@
   </div>
   <div class="ui divider"></div>
   <%= render 'shared/error_messages', :target => @asset %>
-  <div class="ticket-data" id="ticket-full-data"> 
+  <div class="ticket-data" id="ticket-full-data">
     <div class="field ui input fluid">
       <%= f.label :serial %>
       <%= f.text_field :serial, :class => "", :placeholder => "Enter serial number, service tag or license no" %>
@@ -61,10 +61,10 @@
     </div>
     <div class="two fields">
       <div class="field">
-        <%= f.label :owner_id %>
-        <%= f.select(:owner_id, 
-          @users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
-          {}, 
+        <%= f.label "User" %>
+        <%= f.select(:owner_id,
+          current_user.profiles.map{|s|[s.lastname+', '+s.firstname, s.id]},
+          {},
           :class => "ui fluid search dropdown"
           ) %>
       </div>
@@ -78,9 +78,9 @@
       <div class="field">
         <%= f.label :asset_location_id %>
         <div class="description">
-          <%= f.select(:asset_location_id, 
-            @asset_locations.map{|s|[s.name, s.id]}, 
-            {}, 
+          <%= f.select(:asset_location_id,
+            @asset_locations.map{|s|[s.name, s.id]},
+            {},
             :class => "ui fluid dropdown"
             ) %>
         </div>
@@ -107,13 +107,12 @@
     <%= link_to '<i class="chevron left icon"></i> Back'.html_safe(),
      @asset, :class => "ui small labeled icon button", id: "btn-ticket-close" %>
     <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
-        <i class="save icon"></i> Save changes
+        <i class="save icon"></i> Submit changes
     <% end %>
-    <%= link_to '<i class="delete icon"></i> Delete'.html_safe(), 
-      @asset, 
-      method: :delete, 
-      data: { confirm: 'Are you sure?' }, 
+    <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
+      assetproc_path,
+      method: :delete,
+      data: { confirm: 'Are you sure?' },
       :class =>"ui red small icon labeled button" if @asset.id %>
   </div>
 <% end %>
-

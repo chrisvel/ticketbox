@@ -13,12 +13,12 @@
     <% @assets_all.each do |asset| %>
       <tr>
         <td class="text-center">
-          <%= link_to (asset.serial.nil? ? "N/A" : 
-            truncate(asset.serial, length: 18)), asset, 
+          <%= link_to (asset.serial.nil? ? "N/A" :
+            truncate(asset.serial, length: 18)), asset,
             {:class => "table_link"}  %>
         </td>
         <td>
-          <%= asset.user.blank? ? "Spare" : "#{asset.user.lastname} , #{asset.user.firstname}" %>
+          <%= asset.owner.blank? ? "Spare" : "#{asset.owner.lastname} , #{asset.owner.firstname}" %>
         </td>
         <td class="text-center"><%= asset.brand.blank? ? "-" : asset.brand %></td>
         <td class="text-center"><%= asset.kind.blank? ? "-" : truncate(asset.kind, length: 30) %></td>
@@ -31,7 +31,7 @@
   <tfoot>
     <tr>
       <th colspan="6">
-        <div class="row">  
+        <div class="row">
           <div class="ui two column grid">
             <div class="column">
               <div class="info-pagination">
@@ -40,7 +40,7 @@
               <%= will_paginate @assets_all %>
             </div>
             <div class="column right aligned">
-              <%= link_to '<i class="plus icon"></i> New Asset'.html_safe(), 
+              <%= link_to '<i class="plus icon"></i> New Asset'.html_safe(),
                 new_asset_path, { :class => "ui tiny teal icon labeled button"} %>
             </div>
           </div>
@@ -49,6 +49,3 @@
     </tr>
   </tfoot>
 </table>
-
-
-
