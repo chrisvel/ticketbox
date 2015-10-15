@@ -5,6 +5,8 @@ describe User do
 
   let(:user){ FactoryGirl.create :user }
 
+  it { expect(user).to be_valid }
+
   it "has valid factories" do
     expect(FactoryGirl.build(:user)).to be_valid
     expect(FactoryGirl.build(:peter)).to be_valid
@@ -16,12 +18,6 @@ describe User do
   it { should respond_to(:lastname) }
   it { should respond_to(:email) }
   it { should respond_to(:defaults) }
-  # TODO self.search
-  # TODO default
-
-  it 'returns the average if there are enough submissions' do
-      expect(User.search('jmurdock').first).to eq(user)
-  end
 
   # Associations
   context 'associations' do
@@ -43,19 +39,19 @@ describe User do
     it 'Businesses should belong to user' do
       expect(Business.new).to belong_to :owner
     end
-    it 'user should have many businesses' do
+    it 'User should have many businesses' do
       expect(user).to have_many :businesses
     end
     it 'Groups should belong to user' do
       expect(Group.new).to belong_to :owner
     end
-    it 'user should have many groups' do
+    it 'User should have many groups' do
       expect(user).to have_many :groups
     end
-    it 'user should have many (user) profiles' do
+    it 'User should have many (user) profiles' do
       expect(user).to have_many :profiles
     end
-    it 'user should have one membership' do
+    it 'User should have one membership' do
       expect(User.new).to have_one :membership
     end
   end
@@ -127,16 +123,29 @@ describe User do
       user.password_confirmation = '123'
       expect(user).not_to be_valid
     end
+    it 'when .email changes after its initial creation' do
+      user.update_attributes email: 'oh@yeah.com'
+      user.save
+      expect(user.reload).not_to eql('oh@yeah.com')
+    end
   end
 
-  it '.email must never change after its initial creation' do
-    user.update_attributes email: 'oh@yeah.com'
-    user.save
-    expect(user.reload).not_to eql('oh@yeah.com')
+  context '#search' do
+    it 'should return the right record with the given username' do
+        expect(User.search(user.username).first).to eq user
+    end
+    it 'should return the right record with the right lastname' do
+        expect(User.search(user.lastname).first).to eq user
+    end
+    it 'should return all records with an empty attribute' do
+        expect(User.search('').count).to eq(User.all.count)
+    end
   end
 
-  it 'is valid' do
-    expect(user).to be_valid
+  context '#defaults' do
+    it 'should set a default leaver value when initialized' do
+        expect(user.leaver).to be_falsey
+    end
   end
 
 end
