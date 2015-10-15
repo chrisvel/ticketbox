@@ -56,7 +56,7 @@ class AssetsController < ApplicationController
     @asset_locations = current_user.asset_locations.order('name ASC')
     @owner = current_user
     @asset = current_user.assets.create(asset_params)
-    if @asset.persisted?
+    if @asset.save
       flash[:green] = "Asset created!"
       redirect_to assets_path
     else

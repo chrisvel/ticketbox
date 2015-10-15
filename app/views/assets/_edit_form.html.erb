@@ -110,7 +110,7 @@
         <i class="save icon"></i> Submit changes
     <% end %>
     <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
-      assetproc_path,
+      {:action => 'destroy', :id => @asset.id},
       method: :delete,
       data: { confirm: 'Are you sure?' },
       :class =>"ui red small icon labeled button" if @asset.id %>

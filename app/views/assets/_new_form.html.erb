@@ -10,7 +10,7 @@
   ('<div class="ui top right attached green label">
     <i class="trash icon"></i>RECYCLED</div>').html_safe() : "" %>
 
-<%= form_for(@asset, url: assetproc_path(@asset), :html => {:class => "ui small form"}) do |f| %>
+<%= form_for(@asset, url: assetprocs_url, :html => {:class => "ui small form"}) do |f| %>
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
@@ -62,7 +62,7 @@
     <div class="two fields">
       <div class="field">
         <%= f.label "User" %>
-        <%= f.select(:owner_id,
+        <%= f.select(:user_id,
           current_user.profiles.map{|s|[s.lastname+', '+s.firstname, s.id]},
           {},
           :class => "ui fluid search dropdown"
