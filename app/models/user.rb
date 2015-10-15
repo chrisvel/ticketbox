@@ -19,14 +19,12 @@ class User < ActiveRecord::Base
   belongs_to :business, :foreign_key => "business_id"
   has_many :groups, :foreign_key => "owner_id"
   belongs_to :group, :foreign_key => "group_id"
-  belongs_to :business, :foreign_key => "business_id"
   has_one :membership
   has_many :profiles, class_name: "User", :foreign_key => "profile_id"
   belongs_to :user, foreign_key: :profile_id
 
   # Validations
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-
   validates :firstname, length: { maximum: 20 }
   validates :lastname, length: { maximum: 20 }
   validates :email, presence: true, length: { maximum: 250 },
@@ -42,28 +40,18 @@ class User < ActiveRecord::Base
     :default_url => "/images/no-image.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  #def get_user_fullname
-  #  "#{self.lastname}, #{self.firstname}"
-  #end
-
-  #def get_user_fullname
-  #  "#{self.user.lastname}, #{self.user.firstname}"
-  #end
-
-  def self.search(search)
-    if search
-      where('username LIKE ? OR lastname LIKE ?', "%#{search}%", "%#{search}%")
+  # Simple search for username or lastname
+  def self.search(term)
+    if term
+      where('username LIKE ? OR lastname LIKE ?', "%#{term}%", "%#{term}%")
     else
       all
     end
   end
 
+  # Set a user initially as a non leaver
   def defaults
     self.leaver ||= 0
   end
-
-  private
-
-    #
 
 end
