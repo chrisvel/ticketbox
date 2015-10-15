@@ -6,10 +6,7 @@ class UsersController < ApplicationController
 
   # GET /users
   # GET /users.json
-
   def index
-
-    # TODO current_user.users.search.....
     @users_all = current_user.search(params[:search])
       .paginate(page: params[:page])
       .order('lastname ASC')
@@ -99,16 +96,16 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  # /signup
+  # GET /signup
   def signup
     @user = User.new
   end
 
   private
 
-    def owner_delete
-      redirect_to(root_url) unless current_user.id == @user.id
-    end
+    #def owner_delete
+    #  redirect_to(root_url) unless current_user.id == @user.id
+    #end
 
     def user_params
       params.require(:user).permit(
