@@ -27,7 +27,6 @@ class TicketsController < ApplicationController
   end
 
   def edit
-    #@ticket = Ticket.where("owner_id = ?", current_user).find(params[:id])
     @ticket = current_user.tickets.find(params[:id])
   end
 

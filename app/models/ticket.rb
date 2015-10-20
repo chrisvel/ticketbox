@@ -1,18 +1,19 @@
 class Ticket < ActiveRecord::Base
   #include PublicActivity::Model
   #tracked owner: Proc.new{ |controller, model| controller.current_user }
-  
+
   belongs_to :user, :class_name => 'User', :foreign_key => 'user_id'
+  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
   belongs_to :ticket_category, :foreign_key => 'ticket_category_id'
   self.table_name = "tickets"
-  
+
   validates :issue,  presence: true,  length: { minimum:6, maximum: 300 }
   validates :date_opened,  presence: true
-  
+
   #
   # scopes
   #
-  scope :all_unsolved, -> { 
+  scope :all_unsolved, -> {
     where("status = ? or status = ? or status = ?", 'OP', 'IP', 'WF')
     .order('severity = "asap" DESC',
            'severity = "high" DESC',
@@ -20,8 +21,8 @@ class Ticket < ActiveRecord::Base
            'severity = "low" DESC',
            'date_opened ASC')
    }
-   
-   scope :all_opened, -> { 
+
+   scope :all_opened, -> {
      where("status = ? ", 'OP')
      .order('severity = "asap" DESC',
             'severity = "high" DESC',
@@ -29,8 +30,8 @@ class Ticket < ActiveRecord::Base
             'severity = "low" DESC',
             'date_opened ASC')
     }
-    
-    scope :all_in_progress, -> { 
+
+    scope :all_in_progress, -> {
       where("status = ? ", 'IP')
      }
 

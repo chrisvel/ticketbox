@@ -10,11 +10,11 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @ticket_category.user.blank? ? 
+        <%= @ticket_category.owner.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @ticket_category.user.avatar.blank? ? 
+                @ticket_category.owner.avatar.blank? ?
                 image_tag("no-image.png", alt: "noimage") :
-                image_tag(@ticket_category.user.avatar.url(:medium))
+                image_tag(@ticket_category.owner.avatar.url(:medium))
                 %>
       </div>
       <div class="middle aligned content">
@@ -34,14 +34,14 @@
   <div class="asset-data">
     <div class="field ui input fluid">
       <%= f.label :name %>
-      <%= f.text_field :name, 
-        :class => "", 
+      <%= f.text_field :name,
+        :class => "",
         :placeholder => "Enter ticket category name.." %>
     </div>
     <div class="field">
       <%= f.label :owner_id %>
-      <input placeholder="<%= @ticket_category.nil? ? 
-      @ticket_category.owner.lastname+", "+@ticket_category.owner.firstname : 
+      <input placeholder="<%= @ticket_category.nil? ?
+      @ticket_category.owner.lastname+", "+@ticket_category.owner.firstname :
       current_user.lastname+", "+current_user.firstname %>"
         readonly="readonly" type="text" >
     </div>
@@ -52,10 +52,10 @@
       <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
           <i class="save icon"></i> Save changes
       <% end %>
-      <%= link_to '<i class="delete icon"></i> Delete ticket category'.html_safe(), 
-        @ticket_category, 
-        method: :delete, 
-        data: { confirm: 'Are you sure?' }, 
+      <%= link_to '<i class="delete icon"></i> Delete ticket category'.html_safe(),
+        @ticket_category,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
         :class =>"ui red small icon labeled button" if @ticket_category.id %>
     </div>
   </div>

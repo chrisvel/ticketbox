@@ -10,9 +10,9 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @ticket.user.blank? ? 
+        <%= @ticket.user.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @ticket.user.avatar.blank? ? 
+                @ticket.user.avatar.blank? ?
                 image_tag("no-image.png", alt: "noimage") :
                 image_tag(@ticket.user.avatar.url(:medium))
                 %>
@@ -29,7 +29,7 @@
   </div>
   <div class="ui divider"></div>
   <%= render 'shared/error_messages', :target => @ticket %>
-  <div class="ticket-data" id="ticket-full-data"> 
+  <div class="ticket-data" id="ticket-full-data">
     <div class="field ui input fluid">
       <%= f.label :issue %>
       <%= f.text_field :issue, :placeholder => "Enter short description" %>
@@ -37,15 +37,15 @@
     <div class="two fields">
       <div class="field">
         <%= f.label :ticket_category_id %>
-        <%= f.select(:ticket_category_id, 
-          @ticket_categories.map{|s|[s.name, s.id]}, {}, 
+        <%= f.select(:ticket_category_id,
+          @ticket_categories.map{|s|[s.name, s.id]}, {},
           :class => "ui fluid search dropdown") %>
       </div>
       <div class="field">
         <%= f.label :user_id %>
-        <%= f.select(:user_id, 
-          @users.map{|s|[s.lastname+', '+s.firstname, s.id]}, 
-          {}, 
+        <%= f.select(:user_id,
+          current_user.profiles.map{|s| [s.lastname+', '+s.firstname, s.id]}, 
+          {},
           :class => "ui fluid search dropdown"
           ) %>
       </div>
@@ -53,30 +53,30 @@
     <div class="two fields">
       <div class="field">
         <%= f.label :severity %>
-        <%= f.select(:severity,options_for_priority, {}, 
+        <%= f.select(:severity,options_for_priority, {},
           :class => "ui fluid search dropdown")  %>
       </div>
       <div class="field">
         <%= f.label :status %>
-        <%= f.select(:status, options_for_status, {}, 
+        <%= f.select(:status, options_for_status, {},
           :class => "ui fluid search dropdown", :id => "ticket-status") %>
       </div>
     </div>
     <div class="two fields">
       <div class="field">
         <%= f.label :date_opened %>
-        <%= f.text_field :date_opened, 
-          :value => 
-	  	    @ticket.id ? 
+        <%= f.text_field :date_opened,
+          :value =>
+	  	    @ticket.id ?
 			    f.object.date_opened.strftime('%Y-%m-%d %H:%m') :
-			    DateTime.now.strftime('%Y-%m-%d %H:%m'), 
-          :class => "datetimepicker datetime-text" 
+			    DateTime.now.strftime('%Y-%m-%d %H:%m'),
+          :class => "datetimepicker datetime-text"
           %>
       </div>
       <div class="field">
         <%= f.label :date_closed %>
-        <%= f.text_field :date_closed, 
-          :value => (f.object.date_closed.strftime('%Y-%m-%d %H:%m') if f.object.date_closed), 
+        <%= f.text_field :date_closed,
+          :value => (f.object.date_closed.strftime('%Y-%m-%d %H:%m') if f.object.date_closed),
           :class => "datetimepicker datetime-text",
           :id => "ticket-date-closed"
           %>
@@ -99,12 +99,11 @@
       <%= button_tag(type: 'submit', class: "ui small labeled blue icon button") do %>
           <i class="save icon"></i> Save changes
       <% end %>
-      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(), 
-        @ticket, 
-        method: :delete, 
-        data: { confirm: 'Are you sure?' }, 
+      <%= link_to '<i class="delete icon"></i> Delete'.html_safe(),
+        @ticket,
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
         :class =>"ui red small icon labeled button" if @ticket.id %>
     </div>
   </div>
 <% end %>
-
