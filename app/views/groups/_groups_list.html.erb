@@ -24,9 +24,9 @@
           </div>
         </td>
         <td class="text-center">
-            <%= group.user.nil? ? " " :
-            group.user.lastname +
-            ', ' + group.user.firstname%>
+            <%= group.owner.nil? ? " " :
+            group.owner.lastname +
+            ', ' + group.owner.firstname%>
         </td>
       </tr>
     <% end %>

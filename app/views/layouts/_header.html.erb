@@ -1,47 +1,47 @@
 <header>
   <div class="ui tiered small inverted menu header-menu">
-      <%= link_to ":ticketbox", 
-        intro_path, 
+      <%= link_to ":ticketbox",
+        intro_path,
         :class => 'item',
         :id => 'logo'
       %>
-    
+
       <% if user_signed_in? %>
           <div class="ui mini icon teal labeled top left pointing dropdown button add-new">
             <i class="plus icon"></i>
             <span class="text">Add new item</span>
             <div class="menu">
               <div class="item"><i class="ticket icon"></i>
-                <%= link_to "Ticket", 
-                  new_ticket_path, 
+                <%= link_to "Ticket",
+                  new_ticket_path,
                   :class => 'new-item-link'
                 %>
               </div>
               <div class="item"><i class="laptop icon"></i>
-                <%= link_to "Asset", 
-                  new_asset_path, 
+                <%= link_to "Asset",
+                  new_asset_path,
                   :class => 'new-item-link'
                 %>
               </div>
               <div class="item"><i class="user icon"></i>
-                <%= link_to "User", 
-                  new_user_path, 
+                <%= link_to "User Profile",
+                  new_profile_path,
                   :class => 'new-item-link'
                 %>
               </div>
             </div>
     	    </div>
       <% end %>
-      
+
       <div class="right menu">
-        <% if user_signed_in? %>  
+        <% if user_signed_in? %>
         <div class="ui top right pointing dropdown item">
-          <%= current_user.avatar.blank? ? 
+          <%= current_user.avatar.blank? ?
             image_tag("no-image.png", alt: "noimage", class: "ui avatar image") :
-            image_tag(current_user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image") 
+            image_tag(current_user.avatar.url(:thumb), alt: "user-image", class: "ui avatar image")
             %>
           <div class="text">
-            <% if user_signed_in? %>  
+            <% if user_signed_in? %>
               <% if !@current_user.lastname.nil? && !@current_user.lastname.nil? %>
                 <%= "#{@current_user.lastname}, #{@current_user.firstname}" %>
               <% elsif !@current_user.username.nil? %>
@@ -51,7 +51,7 @@
               <% end %>
              <% end %>
             <i class="dropdown icon"></i>
-          </div> 
+          </div>
           <div class="menu pointing">
                 <%= link_to edit_user_path(current_user), :class => "item" do %>
                     <i class="edit icon"></i> Edit Profile

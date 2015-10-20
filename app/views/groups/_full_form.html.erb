@@ -10,11 +10,11 @@
   <div class="ui items">
     <div class="item">
       <div class="ui tiny image">
-        <%= @group.user.blank? ?
+        <%= @group.owner.blank? ?
               image_tag("no-image.png", alt: "noimage") :
-                @group.user.avatar.blank? ?
+                @group.owner.avatar.blank? ?
                 image_tag("no-image.png", alt: "noimage") :
-                image_tag(@group.user.avatar.url(:medium))
+                image_tag(@group.owner.avatar.url(:medium))
                 %>
       </div>
       <div class="middle aligned content">
@@ -39,9 +39,9 @@
     </div>
     <div class="field">
       <%= f.label :owner_id %>
-      <input placeholder="<%= @group.user.blank? ?
+      <input placeholder="<%= @group.owner.blank? ?
         current_user.lastname+','+current_user.firstname :
-        @group.user.lastname+','+@group.user.firstname %>"
+        @group.owner.lastname+','+@group.owner.firstname %>"
         readonly="readonly" type="text" >
     </div>
     <div class="ui divider"></div>

@@ -50,19 +50,16 @@ class ProfilesController < ApplicationController
       @groups = current_user.groups
       @profile = User.create(user_params)
       @profile.profile_id = current_user.id
-
       generated_password = Devise.friendly_token.first(8)
       @profile.password = generated_password
-
       if @profile.save
         flash[:green] = "User created!"
-        redirect_to @profile
+        redirect_to profile_url(@profile)
       else
         #binding.pry
         redirect_to root_path
       end
     else
-
       @profile = User.new(user_params)
       if @profile.save
         @profile.send_activation_email

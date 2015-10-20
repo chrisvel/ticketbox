@@ -30,7 +30,7 @@ class GroupsController < ApplicationController
     @users = User.where("owner_id = ?", current_user).order('lastname ASC')
     @group = Group.new
   end
-  
+
   # POST /groups
   # POST /groups.json
   def create
@@ -81,10 +81,9 @@ class GroupsController < ApplicationController
     def group_params
       params.require(:group).permit(
         :name,
-        :user_id, 
+        :user_id,
         :owner_id
       )
     end
-    
+
 end
-  

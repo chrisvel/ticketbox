@@ -18,7 +18,7 @@
             {:class => "table_link"}  %>
         </td>
         <td>
-          <%= asset.owner.blank? ? "Spare" : "#{asset.owner.lastname} , #{asset.owner.firstname}" %>
+          <%= asset.user.blank? ? "Spare" : "#{asset.user.lastname} , #{asset.user.firstname}" %>
         </td>
         <td class="text-center"><%= asset.brand.blank? ? "-" : asset.brand %></td>
         <td class="text-center"><%= asset.kind.blank? ? "-" : truncate(asset.kind, length: 30) %></td>
