@@ -23,4 +23,25 @@ class Asset < ActiveRecord::Base
     end
   end
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      assets = Asset.all.joins(:user)
+      assets.each do |asset|
+        csv << [asset.id,
+                asset.serial,
+                asset.brand,
+                asset.kind,
+                asset.date_acquired,
+                asset.user.fullname,
+                asset.comment,
+                asset.ware,
+                asset.asset_location.name,
+                asset.recycled,
+                asset.owner.fullname
+                ]
+      end
+    end
+  end
+
 end

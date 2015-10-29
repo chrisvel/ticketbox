@@ -19,6 +19,7 @@ class AssetsController < ApplicationController
       format.html { render @assets }
       format.json { render json: @assets }
       format.js
+      format.csv { send_data current_user.assets.to_csv }
     end
   end
 

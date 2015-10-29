@@ -54,4 +54,9 @@ class User < ActiveRecord::Base
     self.leaver ||= 0
   end
 
+  # Return the full name of the user
+  def fullname
+    "#{self.lastname}, #{self.firstname}"
+  end
+
 end
