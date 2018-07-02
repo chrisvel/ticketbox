@@ -7,6 +7,20 @@
  - View the most necessary information in your dashboard, including charts that distribute ticket activity by week or month, public activity of your agents or the top hot tickets that are pending or in progress right now.
  - View your assets by location (e.g. by floor or building), users by business and other useful stuff.
 
+## Why?
+
+Initially, __:ticketbox__ was built as a side project of mine in order to control user requests in a previous job I had as a Senior Service Delivery Analyst. The Java/Oracle tool we had back then was totally crap (bugs in every click, incompatibilities, crashes and a huge lag in all requests), so :ticketbox made me and the users happy - although a decentralized solution.
+
+I didn't have the authority to send email 'internally', that's why actionmailer is missing.
+
+The tests have also been missing and programming techniques may be a little bit 'outdated' as it was created at ~2012-2013.
+
+There are great players out there in the field of HelpDesk and Ticket Management however, I really believe this app can help a 150-200 people company as I have tried it to in the past.
+
+It's simple and efficient, without the bloat and over-engineering other solutions have. I am intended to resume development If I see interest from you, so just let me know.
+
+Thanks for checking out! 
+
 ## Screenshots
 
 __View ticket__
