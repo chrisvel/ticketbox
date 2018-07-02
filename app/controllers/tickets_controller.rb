@@ -75,11 +75,11 @@ class TicketsController < ApplicationController
         .tickets
         .where("status = ? or status = ? or status = ?", 'OP', 'IP', "WF")
         .paginate(page: params[:page])
-        .order('severity = "asap" DESC',
-               'severity = "high" DESC',
-               'severity = "normal" DESC',
-               'severity = "low" DESC',
-               'date_opened ASC')
+        # .order('severity = "asap" DESC',
+        #        'severity = "high" DESC',
+        #        'severity = "normal" DESC',
+        #        'severity = "low" DESC',
+        #        'date_opened ASC')
     end
 
     def get_all_aborted

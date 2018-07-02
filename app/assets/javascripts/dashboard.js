@@ -1,11 +1,11 @@
 // Tickets per day of week
 var ready;
 ready = function() {
-  
+
   //
   // Setup Tickets per day of week chart
   //
-  if (gon.day_labels) { var labels = gon.day_labels; } 
+  if (gon.day_labels) { var labels = gon.day_labels; }
   if (gon.day_values) { var values = gon.day_values; }
   var lineChartData = {
   	labels : labels,
@@ -18,7 +18,7 @@ ready = function() {
   			pointStrokeColor : "#fff",
   			pointHighlightFill : "#fff",
   			pointHighlightStroke : "rgba(220,220,220,1)",
-  			data : values,  		
+  			data : values,
       }
   	]
   };
@@ -26,11 +26,11 @@ ready = function() {
 	window.myLine = new Chart(tickets_wday_ctx).Line(lineChartData, {
 		responsive: true
 	});
-  
+
   //
   // Setup Tickets per month chart
   //
-  if (gon.mth_labels) { var mth_labels = gon.mth_labels; } 
+  if (gon.mth_labels) { var mth_labels = gon.mth_labels; }
   if (gon.mth_values) { var mth_values = gon.mth_values; }
   var tickets_per_month_lineChartData = {
   	labels : mth_labels,
@@ -43,7 +43,7 @@ ready = function() {
   			pointStrokeColor : "#fff",
   			pointHighlightFill : "#fff",
   			pointHighlightStroke : "rgba(220,220,220,1)",
-  			data : mth_values,  	
+  			data : mth_values,
       }
   	]
   };
@@ -53,5 +53,5 @@ ready = function() {
 	});
 };
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
+// $(document).ready(ready);
+// $(document).on('turbolinks:load', ready);

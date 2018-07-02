@@ -10,14 +10,12 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require libs/Chart
-//= require libs/excanvas
 //= require jquery
-//= require jquery.turbolinks
-//= require jquery_ujs
+//= require semantic-ui
+//= require rails-ujs
+//= require activestorage
+//= require turbolinks
 //= require jquery.datetimepicker
 //= require jquery.tablesort.min.js
-//= require jquery.turbolinks
 //= require moment
 //= require_tree .
-//= require turbolinks

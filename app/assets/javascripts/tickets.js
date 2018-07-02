@@ -18,6 +18,6 @@ var ticketReady = function() {
 };
 // Load jQuery data 
 $(document).ready(ticketReady);
-$(document).on('page:load', ticketReady);
-$(document).on('page:fetch', ticketReady);
-$(document).on('page:change', ticketReady);
+$(document).on('turbolinks:load', ticketReady);
+$(document).on('turbolinks:fetch', ticketReady);
+$(document).on('turbolinks:change', ticketReady);

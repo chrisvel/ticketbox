@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20151012112355) do
     t.string  "kind",              limit: 100,        null: false
     t.date    "date_acquired",                        null: false
     t.integer "user_id",           limit: 4
-    t.text    "comment",           limit: 4294967295, null: false
+    t.text    "comment",           limit: 65535, null: false
     t.string  "ware",              limit: 50,         null: false
     t.integer "asset_location_id", limit: 4,          null: false
     t.boolean "recycled",                             null: false
