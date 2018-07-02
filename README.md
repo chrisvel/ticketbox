@@ -9,13 +9,20 @@
 
 ## Screenshots
 
-![](https://farm9.staticflickr.com/8599/16711063632_cf26837c30_z.jpg)
+__View ticket__
+![View ticket](screenshots/ticketbox_1.png)
 
-![](https://farm9.staticflickr.com/8570/16092174483_f8678d44df_z.jpg)
+__New ticket__
+![View ticket](screenshots/ticketbox_2.png)
 
-![](https://farm9.staticflickr.com/8647/16525992599_15e4a04177_z.jpg)
+__View User Tickets & Assets__
+![View User Data](screenshots/ticketbox_3.png)
 
-![](https://farm9.staticflickr.com/8629/16710833041_fd51e7eeee_z.jpg)
+__Profile Menu__
+![Profile Menu](screenshots/ticketbox_4.png)
+
+__Users__
+![Users View](screenshots/ticketbox_5.png)
 
 ## Requirements
 
@@ -32,18 +39,17 @@ Plus lots of Ruby Gems, a complete list of which is at the *root* folder of the 
 
 ## Instructions
 
-Please don't freak out by the absence of tests. I am currently building my knowledge and soon I will add lots of them. 
+Please don't freak out by the absence of tests. I am currently building my knowledge and soon I will add lots of them.
 
 First create the database:
 ` rake db:create `
 
 Then create the tables:
- `rake db:schema:load` 
+ `rake db:schema:load`
 
 ## Contributing
 
-:ticketbox is **100% free** and **open-source**. We encourage and support an active, healthy community that
-accepts contributions from the public &ndash; including you!
+:ticketbox is **100% free** and **open-source**. We encourage and support an active, healthy community that accepts contributions from the public &ndash; including you!
 
 We look forward to seeing your pull requests!
 

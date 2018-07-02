@@ -38,7 +38,8 @@ class Asset < ActiveRecord::Base
                 asset.ware,
                 asset.asset_location.name,
                 asset.recycled,
-                asset.owner.fullname
+                asset.owner.fullname,
+                asset.user.username
                 ]
       end
     end
